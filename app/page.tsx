@@ -110,10 +110,10 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="relative h-[500px] order-1 md:order-1">
                 <Image
-                  src="/placeholder.svg?height=1000&width=800"
+                  src="/chili-oil.png"
                   alt="chara Homemade Chili Oil bottle"
                   fill
-                  className="object-contain"
+                  className="object-contain mix-blend-multiply"
                 />
               </div>
               <div className="order-2 md:order-2">
