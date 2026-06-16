@@ -165,13 +165,13 @@ export default function Home() {
                 <div className="space-y-6 mb-10">
                   <div>
                     <h3 className="text-lg font-serif text-stone-900 mb-2 tracking-wide">Email</h3>
-                    <p className="text-stone-700">hello@charah-foods.com</p>
+                    <p className="text-stone-700">hello@chara-foods.com</p>
                   </div>
                 </div>
                 <div>
                   <h3 className="text-lg font-serif text-stone-900 mb-4 tracking-wide">Follow Us</h3>
                   <div className="flex space-x-4">
-                    <Link href="#" className="text-stone-700 hover:text-red-700 transition-colors">
+                    <Link href="https://instagram.com/eat.charah" target="_blank" rel="noopener noreferrer" className="text-stone-700 hover:text-red-700 transition-colors">
                       <Instagram className="h-6 w-6" />
                       <span className="sr-only">Instagram</span>
                     </Link>
