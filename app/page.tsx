@@ -23,8 +23,8 @@ export default function Home() {
       <header className="sticky top-0 z-40 w-full border-b bg-stone-50/80 backdrop-blur-sm border-stone-200">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <Image src="/logo.png" alt="chara logo" width={40} height={40} className="rounded-full" />
-            <span className="text-2xl font-serif text-red-700 tracking-wide">chara</span>
+            <Image src="/logo.png" alt="charah logo" width={40} height={40} className="rounded-full" />
+            <span className="text-2xl font-serif text-red-700 tracking-wide">charah</span>
           </Link>
           <nav className="hidden md:flex gap-8">
             <Link href="#product" className="text-sm font-medium text-stone-700 hover:text-red-700 transition-colors">
@@ -37,7 +37,6 @@ export default function Home() {
               Contact
             </Link>
           </nav>
-          <Button className="bg-red-700 hover:bg-red-800 text-stone-50 rounded-full px-6">Pre-order</Button>
         </div>
       </header>
       <main className="flex-1">
@@ -47,7 +46,7 @@ export default function Home() {
           <div className="relative h-[85vh]">
             <Image
               src="/headline.png"
-              alt="Delicious char siu pork with chara sauce served over rice"
+              alt="Delicious char siu pork with charah sauce served over rice"
               fill
               className="object-cover"
               priority
@@ -57,8 +56,8 @@ export default function Home() {
             <div className="container">
               <div className="max-w-2xl space-y-1">
                 <div className="flex items-center gap-4 mb-4">
-                  <Image src="/logo.png" alt="chara logo" width={60} height={60} className="rounded-full" />
-                  <h1 className="text-6xl font-serif text-stone-50 md:text-7xl tracking-wide">chara</h1>
+                  <Image src="/logo.png" alt="charah logo" width={60} height={60} className="rounded-full" />
+                  <h1 className="text-6xl font-serif text-stone-50 md:text-7xl tracking-wide">charah</h1>
                 </div>
                 <p className="text-xl text-stone-100 leading-relaxed">
                   Authentically Hong Kong. Reimagined in Brooklyn.
@@ -74,23 +73,20 @@ export default function Home() {
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="order-2 md:order-1">
-                <h3 className="text-3xl font-serif text-stone-900 mb-6 tracking-wide">chara Original</h3>
+                <h3 className="text-3xl font-serif text-stone-900 mb-6 tracking-wide">charah Original</h3>
                 <p className="text-md text-stone-700 mb-8 leading-relaxed">
-                Our flagship <strong>char siu BBQ marinade</strong> is a labor of love — five years in the making. While the world perfected sourdough during lockdown, we were perfecting <strong>Chara</strong> — the bold, sweet-savory marinade that brings Hong Kong to your kitchen.</p>
+                Our flagship <strong>char siu BBQ marinade</strong> is a labor of love — five years in the making. While the world perfected sourdough during lockdown, we were perfecting <strong>Charah</strong> — the bold, sweet-savory marinade that brings Hong Kong to your kitchen.</p>
                 <p className="text-md text-stone-700 mb-8 leading-relaxed"> Crafted with traditional soy sauce, fresh aromatics, and a carefully guarded blend of spices — including fermented tofu <em>(think cheese, but soy-based and funky in the best way)</em> — this marinade is our love letter to char siu.</p>
                 <ul><li>✨ <strong>Best with pork.</strong> Great with chicken. Versatile with anything.</li>
                 <li>🔥 Small-batch made, always.</li>
                 <li>🥢 The perfect crowd-pleaser for your next BBQ.</li></ul>               
                 <div className="space-y-4 mb-10">
                 </div>
-                <Button className="bg-red-700 hover:bg-red-800 text-stone-50 rounded-full px-8 py-3">
-                  Buy Now - $14.99
-                </Button>
               </div>
               <div className="relative h-[500px] order-1 md:order-2">
                 <Image
                   src="/sauce.png"
-                  alt="chara Original Sauce bottle"
+                  alt="charah Original Sauce bottle"
                   fill
                   className="object-contain mix-blend-multiply"
                 />
@@ -111,7 +107,7 @@ export default function Home() {
               <div className="relative h-[500px] order-1 md:order-1">
                 <Image
                   src="/chili-oil.png"
-                  alt="chara Homemade Chili Oil bottle"
+                  alt="charah Homemade Chili Oil bottle"
                   fill
                   className="object-contain mix-blend-multiply"
                 />
@@ -121,11 +117,8 @@ export default function Home() {
                 <p className="text-md text-stone-700 mb-8 leading-relaxed">
                   Made with premium dried chilies, tongue-tingling peppercorns, and a secret blend of fragrant spices — it’s bold, aromatic, and just the right kind of dangerous.
                 <br/><br/>
-                We created our chili oil to bring a little kick to the deep, savory notes of our signature chara marinade.
+                We created our chili oil to bring a little kick to the deep, savory notes of our signature charah marinade.
                 </p>
-                <Button className="bg-red-700 hover:bg-red-800 text-stone-50 rounded-full px-8 py-3">
-                  Pre-order - $12.99
-                </Button>
               </div>
             </div>
           </div>
@@ -138,18 +131,18 @@ export default function Home() {
               <div>
                 <h2 className="text-4xl font-serif text-stone-50 mb-8 tracking-wide">Our Story</h2>
                 <p className="text-lg text-stone-100 mb-6 leading-relaxed">
-                  We are Flora and Clara, the makers of Chara. We share deep roots in Hong Kong, were globally raised,
+                  We are Flora and Clara, the makers of Charah. We share deep roots in Hong Kong, were globally raised,
                   and now proudly rooted in Brooklyn, New York.
                 </p>
                 <p className="text-lg text-stone-100 leading-relaxed">
-                  Caught between our identities as proud Hong Kongers and Americans, Chara is our way of honoring the
+                  Caught between our identities as proud Hong Kongers and Americans, Charah is our way of honoring the
                   city that shaped and fueled us.
                 </p>
               </div>
               <div className="relative h-[500px] rounded-2xl overflow-hidden">
                 <Image
                   src="/about-us.png"
-                  alt="Flora and Clara, the makers of chara sauce"
+                  alt="Flora and Clara, the makers of charah sauce"
                   fill
                   className="object-cover"
                 />
@@ -172,7 +165,7 @@ export default function Home() {
                 <div className="space-y-6 mb-10">
                   <div>
                     <h3 className="text-lg font-serif text-stone-900 mb-2 tracking-wide">Email</h3>
-                    <p className="text-stone-700">hello@chara-foods.com</p>
+                    <p className="text-stone-700">hello@charah-foods.com</p>
                   </div>
                 </div>
                 <div>
@@ -200,8 +193,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <Image src="/logo.png" alt="chara logo" width={32} height={32} className="rounded-full" />
-                <h3 className="text-lg font-serif tracking-wide">chara</h3>
+                <Image src="/logo.png" alt="charah logo" width={32} height={32} className="rounded-full" />
+                <h3 className="text-lg font-serif tracking-wide">charah</h3>
               </div>
               <p className="text-stone-400 leading-relaxed">
                 Bringing authentic Asian barbecue flavors to your kitchen since 2018.
