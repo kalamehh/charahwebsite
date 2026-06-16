@@ -43,12 +43,14 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-stone-900/70 to-stone-900/40 z-10" />
-          <div className="relative h-[85vh]">
+          <div className="relative w-full">
             <Image
               src="/headline.png"
               alt="Delicious char siu pork with charah sauce served over rice"
-              fill
-              className="object-cover"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-auto"
               priority
             />
           </div>
