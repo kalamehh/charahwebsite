@@ -24,7 +24,7 @@ export default function Home() {
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <Image src="/logo.png" alt="charah logo" width={40} height={40} className="rounded-full" />
-            <span className="text-2xl font-serif text-red-700 tracking-wide">charah</span>
+            <span className="text-2xl font-serif text-red-700 tracking-wide">CHARAH</span>
           </Link>
           <nav className="hidden md:flex gap-8">
             <Link href="#product" className="text-sm font-medium text-stone-700 hover:text-red-700 transition-colors">
@@ -43,12 +43,12 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-stone-900/70 to-stone-900/40 z-10" />
-          <div className="relative h-screen w-full">
+          <div className="relative h-[60vw] md:h-screen w-full">
             <Image
               src="/headline.png"
               alt="Delicious char siu pork with charah sauce served over rice"
               fill
-              className="object-cover object-top"
+              className="object-cover object-center"
               priority
             />
           </div>
@@ -57,7 +57,7 @@ export default function Home() {
               <div className="max-w-2xl space-y-1">
                 <div className="flex items-center gap-4 mb-4">
                   <Image src="/logo.png" alt="charah logo" width={60} height={60} className="rounded-full" />
-                  <h1 className="text-6xl font-serif text-stone-50 md:text-7xl tracking-wide">charah</h1>
+                  <h1 className="text-6xl font-serif text-stone-50 md:text-7xl tracking-wide">CHARAH</h1>
                 </div>
                 <p className="text-xl text-stone-100 leading-relaxed">
                   Authentically Hong Kong. Reimagined in Brooklyn.
