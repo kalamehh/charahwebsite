@@ -23,7 +23,7 @@ export default function Home() {
       <header className="sticky top-0 z-40 w-full border-b bg-stone-50/80 backdrop-blur-sm border-stone-200">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <Image src="/logo.png" alt="charah logo" width={40} height={40} className="rounded-full" />
+            <Image src="/logo.png" alt="charah logo" width={40} height={40} className="scale-110" />
             <span className="text-2xl text-red-700 uppercase" style={{ fontFamily: "var(--font-anton)" }}>CHARAH</span>
           </Link>
           <nav className="hidden md:flex gap-8">
@@ -56,7 +56,7 @@ export default function Home() {
             <div className="container">
               <div className="max-w-2xl space-y-1">
                 <div className="flex items-center gap-4 mb-4">
-                  <Image src="/logo.png" alt="charah logo" width={60} height={60} className="rounded-full" />
+                  <Image src="/logo.png" alt="charah logo" width={60} height={60} className="scale-110" />
                   <h1 className="text-6xl text-stone-50 md:text-7xl uppercase" style={{ fontFamily: "var(--font-anton)" }}>CHARAH</h1>
                 </div>
                 <p className="text-xl text-stone-100 leading-relaxed">
@@ -193,7 +193,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <Image src="/logo.png" alt="charah logo" width={32} height={32} className="rounded-full" />
+                <Image src="/logo.png" alt="charah logo" width={32} height={32} className="scale-110" />
                 <h3 className="text-lg font-serif tracking-wide">charah</h3>
               </div>
               <p className="text-stone-400 leading-relaxed">
