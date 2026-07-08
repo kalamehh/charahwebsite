@@ -16,7 +16,7 @@ export default function Home() {
       {/* Top Banner */}
       <div className="bg-red-700 text-stone-50 py-2 text-center text-sm">
         <div className="container">
-          <p>Arriving soon. Pre-order available for Brooklyn.</p>
+          <p>Find us at Myrtle Wombat (Fort Greene) and Marbled Meat Shop (Beacon)!</p>
         </div>
       </div>
 
