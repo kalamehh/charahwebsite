@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-stone-50">
       {/* Top Banner */}
-      <div className="bg-red-700 text-stone-50 py-2 text-center text-sm">
+      <div className="bg-black text-stone-50 py-2 text-center text-sm">
         <div className="container">
           <p>Find us at Myrtle Wombat (Fort Greene) and Marbled Meat Shop (Beacon)!</p>
         </div>
@@ -125,7 +125,7 @@ export default function Home() {
         </section>
 
         {/* Brand Section */}
-        <section id="brand" className="py-16" style={{ backgroundColor: "#bf2d16" }}>
+        <section id="brand" className="py-16" style={{ backgroundColor: "#000000" }}>
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
               <div>
