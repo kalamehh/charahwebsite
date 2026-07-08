@@ -24,7 +24,7 @@ export default function Home() {
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <Image src="/logo.png" alt="charah logo" width={40} height={40} className="scale-110" />
-            <span className="text-2xl text-red-700 uppercase" style={{ fontFamily: "var(--font-anton)" }}>CHARAH</span>
+            <span className="text-2xl uppercase" style={{ fontFamily: "var(--font-anton)", color: "#fb784f" }}>CHARAH</span>
           </Link>
           <nav className="hidden md:flex gap-8">
             <Link href="#product" className="text-sm font-medium text-stone-700 hover:text-red-700 transition-colors">
