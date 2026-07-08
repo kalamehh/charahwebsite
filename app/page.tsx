@@ -24,7 +24,7 @@ export default function Home() {
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <Image src="/logo.png" alt="charah logo" width={40} height={40} className="rounded-full" />
-            <span className="text-2xl font-serif text-red-700 tracking-wide">CHARAH</span>
+            <span className="text-2xl text-red-700 uppercase" style={{ fontFamily: "var(--font-anton)" }}>CHARAH</span>
           </Link>
           <nav className="hidden md:flex gap-8">
             <Link href="#product" className="text-sm font-medium text-stone-700 hover:text-red-700 transition-colors">
@@ -57,7 +57,7 @@ export default function Home() {
               <div className="max-w-2xl space-y-1">
                 <div className="flex items-center gap-4 mb-4">
                   <Image src="/logo.png" alt="charah logo" width={60} height={60} className="rounded-full" />
-                  <h1 className="text-6xl font-serif text-stone-50 md:text-7xl tracking-wide">CHARAH</h1>
+                  <h1 className="text-6xl text-stone-50 md:text-7xl uppercase" style={{ fontFamily: "var(--font-anton)" }}>CHARAH</h1>
                 </div>
                 <p className="text-xl text-stone-100 leading-relaxed">
                   Authentically Hong Kong. Reimagined in Brooklyn.
@@ -73,7 +73,7 @@ export default function Home() {
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="order-2 md:order-1">
-                <h3 className="text-3xl font-serif text-stone-900 mb-6 tracking-wide">charah Original</h3>
+                <h3 className="text-3xl text-stone-900 mb-6 uppercase" style={{ fontFamily: "var(--font-anton)" }}>CHARAH ORIGINAL</h3>
                 <p className="text-md text-stone-700 mb-8 leading-relaxed">
                 Our flagship <strong>char siu BBQ marinade</strong> is a labor of love — five years in the making. While the world perfected sourdough during lockdown, we were perfecting <strong>Charah</strong> — the bold, sweet-savory marinade that brings Hong Kong to your kitchen.</p>
                 <p className="text-md text-stone-700 mb-8 leading-relaxed"> Crafted with traditional soy sauce, fresh aromatics, and a carefully guarded blend of spices — including fermented tofu <em>(think cheese, but soy-based and funky in the best way)</em> — this marinade is our love letter to char siu.</p>
