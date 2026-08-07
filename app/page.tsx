@@ -24,7 +24,7 @@ export default function Home() {
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <Image src="/logo.png" alt="charah logo" width={40} height={40} className="scale-110" />
-            <span className="text-2xl uppercase" style={{ fontFamily: "var(--font-anton)", color: "#fb784f" }}>CHARAH</span>
+            <span className="text-2xl uppercase" style={{ fontFamily: "var(--font-anton)", color: "#f43711" }}>CHARAH</span>
           </Link>
           <nav className="hidden md:flex gap-8">
             <Link href="#product" className="text-sm font-medium text-stone-700 hover:text-red-700 transition-colors">
@@ -57,7 +57,7 @@ export default function Home() {
               <div className="max-w-2xl space-y-1">
                 <div className="flex items-center gap-4 mb-4">
                   <Image src="/logo.png" alt="charah logo" width={60} height={60} className="scale-110" />
-                  <h1 className="text-6xl md:text-7xl uppercase" style={{ fontFamily: "var(--font-anton)", color: "#fb784f" }}>CHARAH</h1>
+                  <h1 className="text-6xl md:text-7xl uppercase" style={{ fontFamily: "var(--font-anton)", color: "#f43711" }}>CHARAH</h1>
                 </div>
                 <p className="text-xl text-stone-100 leading-relaxed">
                   Authentically Hong Kong. Reimagined in Brooklyn.
@@ -73,7 +73,7 @@ export default function Home() {
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="order-2 md:order-1">
-                <h3 className="text-3xl text-stone-900 mb-6 tracking-wide"><span style={{ fontFamily: "var(--font-anton)", color: "#fb784f" }}>CHARAH</span> Original</h3>
+                <h3 className="text-3xl text-stone-900 mb-6 tracking-wide"><span style={{ fontFamily: "var(--font-anton)", color: "#f43711" }}>CHARAH</span> Original</h3>
                 <p className="text-md text-stone-700 mb-8 leading-relaxed">
                 Our flagship <strong>char siu BBQ marinade</strong> is a labor of love — five years in the making. While the world perfected sourdough during lockdown, we were perfecting <strong>Charah</strong> — the bold, sweet-savory marinade that brings Hong Kong to your kitchen.</p>
                 <p className="text-md text-stone-700 mb-8 leading-relaxed"> Crafted with traditional soy sauce, fresh aromatics, and a carefully guarded blend of spices — including fermented tofu <em>(think cheese, but soy-based and funky in the best way)</em> — this marinade is our love letter to char siu.</p>
@@ -113,7 +113,7 @@ export default function Home() {
                 />
               </div>
               <div className="order-2 md:order-2">
-                <h3 className="text-3xl text-stone-900 mb-6 tracking-wide"><span style={{ fontFamily: "var(--font-anton)", color: "#fb784f" }}>CHARAH</span> Chili Oil</h3>
+                <h3 className="text-3xl text-stone-900 mb-6 tracking-wide"><span style={{ fontFamily: "var(--font-anton)", color: "#f43711" }}>CHARAH</span> Chili Oil</h3>
                 <p className="text-md text-stone-700 mb-8 leading-relaxed">
                   Made with premium dried chilies, tongue-tingling peppercorns, and a secret blend of fragrant spices — it’s bold, aromatic, and just the right kind of dangerous.
                 <br/><br/>
