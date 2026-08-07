@@ -142,7 +142,7 @@ export default function Home() {
                   src="/about-us.png"
                   alt="Flora and Clara, the makers of charah sauce"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
               </div>
             </div>
