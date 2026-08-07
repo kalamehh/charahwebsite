@@ -69,7 +69,7 @@ export default function Home() {
         </section>
 
         {/* Product Section */}
-        <section id="product" className="py-12" style={{ backgroundColor: "#faf3e6" }}>
+        <section id="product" className="py-12" style={{ backgroundColor: "#ff9e9e" }}>
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="order-2 md:order-1">
@@ -96,12 +96,12 @@ export default function Home() {
         </section>
 
         {/* Subtle Divider */}
-        <div className="h-px bg-stone-300/50" style={{ backgroundColor: "#faf3e6" }}>
+        <div className="h-px bg-stone-300/50" style={{ backgroundColor: "#ff9e9e" }}>
           <div className="h-px bg-stone-300/30 mx-auto max-w-4xl"></div>
         </div>
 
         {/* Chili Oil Section */}
-        <section className="py-12" style={{ backgroundColor: "#faf3e6" }}>
+        <section className="py-12" style={{ backgroundColor: "#ff9e9e" }}>
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="relative h-[500px] order-1 md:order-1">
@@ -152,7 +152,7 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-16" style={{ backgroundColor: "#faf3e6" }}>
+        <section id="contact" className="py-16" style={{ backgroundColor: "#ff9e9e" }}>
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
               <div>
