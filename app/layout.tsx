@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--font-anton" })
 
 export const metadata: Metadata = {
-  title: "chara | Authentic Asian BBQ Sauce",
+  title: "CHARAH | Char Siu BBQ Sauce & Chili Oil",
   description:
     "Authentically Hong Kong. Reimagined in Brooklyn. Ready for the American Table.",
     generator: 'v0.app'
