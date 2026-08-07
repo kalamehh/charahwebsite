@@ -16,7 +16,7 @@ export default function Home() {
       {/* Top Banner */}
       <div className="bg-black text-stone-50 py-2 text-center text-sm">
         <div className="container">
-          <p>Find us at Myrtle Wombat (Fort Greene) and Marbled Meat Shop (Beacon)!</p>
+          <p>Find us at Pearl River Mart (Manhattan), Green Grape Provisions (Brooklyn) and Marbled Meat Shop (Beacon)</p>
         </div>
       </div>
 
@@ -57,9 +57,9 @@ export default function Home() {
               <div className="max-w-2xl flex items-start gap-6">
                 <Image src="/logo.png" alt="charah logo" width={90} height={90} className="scale-110 flex-shrink-0 mt-1" />
                 <div className="space-y-1">
-                  <p className="text-xl text-stone-100 leading-tight">Born in Hong Kong.</p>
-                  <p className="text-xl text-stone-100 leading-tight">Made in Brooklyn.</p>
-                  <p className="text-xl text-stone-100 leading-tight">Ready for the American Table.</p>
+                  <p className="text-sm md:text-xl text-stone-100 leading-tight">Born in Hong Kong.</p>
+                  <p className="text-sm md:text-xl text-stone-100 leading-tight">Made in Brooklyn.</p>
+                  <p className="text-sm md:text-xl text-stone-100 leading-tight">Ready for the American Table.</p>
                 </div>
               </div>
             </div>
@@ -67,9 +67,9 @@ export default function Home() {
         </section>
 
         {/* Product Section */}
-        <section id="product" className="py-12" style={{ backgroundColor: "#ffffff" }}>
+        <section id="product" className="py-6 md:py-12" style={{ backgroundColor: "#ffffff" }}>
           <div className="container">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center">
               <div className="order-2 md:order-1">
                 <h3 className="text-3xl text-stone-900 mb-6 tracking-wide flex items-center gap-2"><Image src="/charah-text.png" alt="CHARAH" width={120} height={36} className="object-contain" /> Original</h3>
                 <p className="text-md text-stone-700 mb-8 leading-relaxed">
@@ -81,7 +81,7 @@ export default function Home() {
                 <div className="space-y-4 mb-10">
                 </div>
               </div>
-              <div className="relative h-[500px] order-1 md:order-2">
+              <div className="relative h-[300px] md:h-[500px] order-1 md:order-2">
                 <Image
                   src="/sauce.png"
                   alt="charah Original Sauce bottle"
@@ -99,10 +99,10 @@ export default function Home() {
         </div>
 
         {/* Chili Oil Section */}
-        <section className="py-12" style={{ backgroundColor: "#ffffff" }}>
+        <section className="py-6 md:py-12" style={{ backgroundColor: "#ffffff" }}>
           <div className="container">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="relative h-[500px] order-1 md:order-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center">
+              <div className="relative h-[300px] md:h-[500px] order-1 md:order-1">
                 <Image
                   src="/chili-oil.png"
                   alt="charah Homemade Chili Oil bottle"
