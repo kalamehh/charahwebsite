@@ -57,8 +57,8 @@ export default function Home() {
               <div className="max-w-2xl flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
                 <Image src="/logo.png" alt="charah logo" width={70} height={70} className="scale-110 flex-shrink-0 md:w-[120px] md:h-[120px]" />
                 <div className="space-y-1">
-                  <p className="text-sm md:text-xl text-stone-100 leading-tight">Born in Hong Kong. Made in Brooklyn.</p>
-                  <p className="text-sm md:text-xl text-stone-100 leading-tight">Ready for the American Table.</p>
+                  <p className="text-base md:text-2xl text-stone-100 leading-tight">Born in Hong Kong. Made in Brooklyn.</p>
+                  <p className="text-base md:text-2xl text-stone-100 leading-tight">Ready for the American Table.</p>
                 </div>
               </div>
             </div>
@@ -127,11 +127,11 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-4xl font-serif text-stone-50 mb-8 tracking-wide">Our Story</h2>
-                <p className="text-lg text-stone-100 mb-6 leading-relaxed">
+                <p className="text-md text-stone-100 mb-6 leading-relaxed">
                   We are Flora and Clara, the makers of Charah. We share deep roots in Hong Kong, were globally raised,
                   and now proudly rooted in Brooklyn, New York.
                 </p>
-                <p className="text-lg text-stone-100 leading-relaxed">
+                <p className="text-md text-stone-100 leading-relaxed">
                   Caught between our identities as proud Hong Kongers and Americans, Charah is our way of honoring the
                   city that shaped and fueled us.
                 </p>
