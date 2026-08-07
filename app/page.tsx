@@ -43,7 +43,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-stone-900/70 to-stone-900/40 z-10" />
-          <div className="relative h-[60vw] md:h-screen w-full">
+          <div className="relative h-[80vw] md:h-screen w-full">
             <Image
               src="/headline.png"
               alt="Delicious char siu pork with charah sauce served over rice"
@@ -54,8 +54,8 @@ export default function Home() {
           </div>
           <div className="absolute inset-0 z-20 flex items-center">
             <div className="container">
-              <div className="max-w-2xl flex items-center gap-6">
-                <Image src="/logo.png" alt="charah logo" width={120} height={120} className="scale-110 flex-shrink-0" />
+              <div className="max-w-2xl flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
+                <Image src="/logo.png" alt="charah logo" width={70} height={70} className="scale-110 flex-shrink-0 md:w-[120px] md:h-[120px]" />
                 <div className="space-y-1">
                   <p className="text-sm md:text-xl text-stone-100 leading-tight">Born in Hong Kong. Made in Brooklyn.</p>
                   <p className="text-sm md:text-xl text-stone-100 leading-tight">Ready for the American Table.</p>
