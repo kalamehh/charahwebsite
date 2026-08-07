@@ -54,14 +54,10 @@ export default function Home() {
           </div>
           <div className="absolute inset-0 z-20 flex items-center">
             <div className="container">
-              <div className="max-w-2xl space-y-1">
-                <div className="flex items-center gap-4 mb-4">
-                  <Image src="/logo.png" alt="charah logo" width={60} height={60} className="scale-110" />
-                  <Image src="/charah-text.png" alt="CHARAH" width={400} height={100} className="object-contain" />
-                </div>
-                <p className="text-xl text-stone-100 leading-relaxed">
-                  Authentically Hong Kong. Reimagined in Brooklyn.
-                </p>
+              <div className="max-w-2xl space-y-4">
+                <Image src="/logo.png" alt="charah logo" width={180} height={180} className="scale-110" />
+                <p className="text-xl text-stone-100 leading-relaxed">Born in Hong Kong.</p>
+                <p className="text-xl text-stone-100 leading-relaxed">Made in Brooklyn.</p>
                 <p className="text-xl text-stone-100 leading-relaxed">Ready for the American Table.</p>
               </div>
             </div>
