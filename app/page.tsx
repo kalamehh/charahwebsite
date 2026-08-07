@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-stone-50">
       {/* Top Banner */}
-      <div className="bg-black text-stone-50 py-2 text-center text-sm">
+      <div className="bg-black text-stone-50 py-2 text-center text-xs md:text-sm">
         <div className="container">
           <p>Find us at Pearl River Mart (Manhattan), Green Grape Provisions (Brooklyn) and Marbled Meat Shop (Beacon)</p>
         </div>
@@ -54,11 +54,10 @@ export default function Home() {
           </div>
           <div className="absolute inset-0 z-20 flex items-center">
             <div className="container">
-              <div className="max-w-2xl flex items-start gap-6">
-                <Image src="/logo.png" alt="charah logo" width={90} height={90} className="scale-110 flex-shrink-0 mt-1" />
+              <div className="max-w-2xl flex items-center gap-6">
+                <Image src="/logo.png" alt="charah logo" width={120} height={120} className="scale-110 flex-shrink-0" />
                 <div className="space-y-1">
-                  <p className="text-sm md:text-xl text-stone-100 leading-tight">Born in Hong Kong.</p>
-                  <p className="text-sm md:text-xl text-stone-100 leading-tight">Made in Brooklyn.</p>
+                  <p className="text-sm md:text-xl text-stone-100 leading-tight">Born in Hong Kong. Made in Brooklyn.</p>
                   <p className="text-sm md:text-xl text-stone-100 leading-tight">Ready for the American Table.</p>
                 </div>
               </div>
@@ -163,7 +162,7 @@ export default function Home() {
                 <div className="space-y-6 mb-10">
                   <div>
                     <h3 className="text-lg font-serif text-stone-900 mb-2 tracking-wide">Email</h3>
-                    <p className="text-stone-700">hello@chara-foods.com</p>
+                    <p className="text-stone-700">hello@charah-foods.com</p>
                   </div>
                 </div>
                 <div>
@@ -192,13 +191,13 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <Image src="/logo.png" alt="charah logo" width={32} height={32} className="scale-110" />
-                <h3 className="text-lg font-serif tracking-wide">charah</h3>
+                <Image src="/charah-text.png" alt="CHARAH" width={80} height={20} className="object-contain" />
               </div>
               <p className="text-stone-400 leading-relaxed">
                 Bringing authentic Asian barbecue flavors to your kitchen since 2018.
               </p>
               <br/>
-              <p className="text-stone-400">&copy; {new Date().getFullYear()} chara. All rights reserved.</p>
+              <p className="text-stone-400">&copy; {new Date().getFullYear()} Charah. All rights reserved.</p>
             </div>
             <div>
               <h3 className="text-lg font-serif mb-4 tracking-wide">Shop</h3>
