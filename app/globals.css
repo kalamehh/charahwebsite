@@ -2,67 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Charah design tokens — light only.
+  Brand: red #F43711 / near-black #0E0B0A / cream #FBF6EF.
+  See docs/rebuild-plan.md.
+*/
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    /* raw brand values */
+    --cream: 36 43% 96%; /* #FBF6EF */
+    --ink: 12 12% 5%; /* #0E0B0A */
+    --stone: 27 8% 39%; /* #6B6259 */
+    --charah-red: 11 91% 51%; /* #F43711 */
+    --charah-red-dark: 13 88% 41%; /* #C42D0E */
+    --hairline: 33 33% 86%; /* #E7DED2 */
+    --surface: 0 0% 100%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    /* shadcn token bindings */
+    --background: var(--cream);
+    --foreground: var(--ink);
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
+    --card: var(--surface);
+    --card-foreground: var(--ink);
 
-    --primary: 0 72.2% 50.6%;
-    --primary-foreground: 0 85.7% 97.3%;
+    --popover: var(--surface);
+    --popover-foreground: var(--ink);
 
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
+    --primary: var(--charah-red);
+    --primary-foreground: 36 43% 96%;
 
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --secondary: 33 33% 92%;
+    --secondary-foreground: var(--ink);
 
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --muted: 33 33% 92%;
+    --muted-foreground: var(--stone);
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --accent: 33 33% 92%;
+    --accent-foreground: var(--ink);
 
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 72.2% 50.6%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 36 43% 96%;
+
+    --border: var(--hairline);
+    --input: var(--hairline);
+    --ring: var(--charah-red);
 
     --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 0 72.2% 50.6%;
-    --primary-foreground: 0 85.7% 97.3%;
-
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 72.2% 50.6%;
   }
 }
 
@@ -71,6 +56,46 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    text-wrap: balance;
   }
 }
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* section on the dark ink ground */
+  .section-ink {
+    background-color: hsl(var(--ink));
+    color: hsl(var(--cream));
+  }
+}
+
+/* Leaflet (stockist map) — brand the default chrome. Plain CSS, not @apply,
+   since these classes come from leaflet.css at runtime rather than our JSX. */
+.leaflet-container {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  background: #FBF6EF;
+  /* Trap Leaflet's internal z-indexes (panes 400, controls 1000) inside their
+     own stacking context so they can't paint over the sticky header (z-40) or
+     the cart sheet (z-50). */
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(14, 11, 10, 0.12);
+}
+.leaflet-popup-content {
+  margin: 0.75rem 0.9rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.leaflet-popup-tip {
+  box-shadow: none;
+}
+
