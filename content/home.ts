@@ -8,7 +8,7 @@ export const home = {
     logoLine: "Born in Hong Kong. Made in Brooklyn.",
     headline: "Char siu, bottled.",
     sub: "Ready for the American table.",
-    ctaPrimary: { label: "Shop the sauces", href: "/shop" },
+    ctaPrimary: { label: "Find a store", href: "/store-locator" },
     ctaSecondary: { label: "See recipes", href: "/recipes" },
   },
   storyTeaser: {

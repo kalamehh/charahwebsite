@@ -13,7 +13,6 @@ export const site = {
 /** Primary nav — used in the header and mirrored in the footer. */
 export const nav: { label: string; href: string }[] = [
   { label: "About Us", href: "/about" },
-  { label: "Shop", href: "/shop" },
   { label: "Store Locator", href: "/store-locator" },
   { label: "Recipes", href: "/recipes" },
 ]
@@ -23,14 +22,6 @@ export const social: { label: string; href: string }[] = [
 ]
 
 export const footerGroups: { title: string; links: { label: string; href: string }[] }[] = [
-  {
-    title: "Shop",
-    links: [
-      { label: "Char Siu BBQ Sauce", href: "/products/original" },
-      { label: "Cantonese Chili Oil", href: "/products/chili-oil" },
-      { label: "All products", href: "/shop" },
-    ],
-  },
   {
     title: "Explore",
     links: [

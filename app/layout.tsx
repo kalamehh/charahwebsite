@@ -2,7 +2,6 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Anton, Playfair_Display } from "next/font/google"
 import "./globals.css"
-import { CartProvider } from "@/components/cart/cart-provider"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 
@@ -41,11 +40,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable} ${anton.variable} ${playfair.variable}`}>
       <body className="flex min-h-screen flex-col bg-charah-cream">
-        <CartProvider>
-          <SiteHeader />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
-        </CartProvider>
+        <SiteHeader />
+        <main className="flex-1">{children}</main>
+        <SiteFooter />
       </body>
     </html>
   )

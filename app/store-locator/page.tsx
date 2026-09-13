@@ -1,8 +1,14 @@
 import { PageHeader } from "@/components/page-header"
 import { StockistMap } from "@/components/stockist-map"
 import { buildMetadata } from "@/lib/seo"
-import { getProduct } from "@/content/products"
 import { googleMapsUrl, stockists, stockistsByRegion } from "@/content/stockists"
+
+// Display labels for what a stockist carries — kept local since the shop
+// catalog (content/products.ts) isn't part of this content-only build.
+const PRODUCT_LABEL: Record<"original" | "chili-oil", string> = {
+  original: "BBQ Sauce",
+  "chili-oil": "Chili Oil",
+}
 
 export const metadata = buildMetadata({
   title: "Store Locator",
@@ -46,7 +52,7 @@ export default function WhereToBuyPage() {
                       </p>
                     </div>
                     <p className="text-body-sm text-charah-stone">
-                      {s.carries.map((c) => getProduct(c)?.shortName).filter(Boolean).join(" · ")}
+                      {s.carries.map((c) => PRODUCT_LABEL[c]).filter(Boolean).join(" · ")}
                     </p>
                   </li>
                 ))}

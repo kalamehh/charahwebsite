@@ -1,18 +1,13 @@
 import Image from "next/image"
 import Link from "next/link"
 import { footerGroups, site, social } from "@/content/site"
-import { PREVIEW_LIMITED } from "@/lib/preview"
 
 export function SiteFooter() {
   const year = new Date().getFullYear()
-  // Hide the "Shop" column in limited-preview mode — its links go to hidden pages.
-  const groups = PREVIEW_LIMITED
-    ? footerGroups.filter((g) => g.title !== "Shop")
-    : footerGroups
 
   return (
     <footer className="section-ink">
-      <div className={`container grid gap-10 py-14 ${PREVIEW_LIMITED ? "md:grid-cols-3" : "md:grid-cols-4"}`}>
+      <div className="container grid gap-10 py-14 md:grid-cols-3">
         <div className="space-y-4">
           <div className="flex items-center gap-2.5">
             <Image src="/logo.png" alt="" width={32} height={32} className="scale-110" />
@@ -26,7 +21,7 @@ export function SiteFooter() {
           </p>
         </div>
 
-        {groups.map((group) => (
+        {footerGroups.map((group) => (
           <div key={group.title}>
             <h3 className="font-serif text-h4 text-charah-cream">{group.title}</h3>
             <ul className="mt-4 space-y-2.5">
