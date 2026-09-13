@@ -20,7 +20,6 @@ export const nav: { label: string; href: string }[] = [
 
 export const social: { label: string; href: string }[] = [
   { label: "Instagram", href: "https://instagram.com/eat.charah" },
-  { label: "TikTok", href: "https://tiktok.com/@eat.charah" },
 ]
 
 export const footerGroups: { title: string; links: { label: string; href: string }[] }[] = [

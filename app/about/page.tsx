@@ -1,5 +1,4 @@
 import Image from "next/image"
-import { PageHeader } from "@/components/page-header"
 import { buildMetadata } from "@/lib/seo"
 
 export const metadata = buildMetadata({
@@ -11,10 +10,9 @@ export const metadata = buildMetadata({
 export default function AboutPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="Our story"
-        title="Two Hong Kongers, one Brooklyn kitchen"
-      />
+      <div className="container pt-10 md:pt-14">
+        <h1 className="text-eyebrow font-semibold uppercase text-charah-red">About Us</h1>
+      </div>
       <div className="container grid items-start gap-10 py-section md:grid-cols-2 md:gap-16">
         <div className="space-y-5 text-body-lg text-charah-stone">
           <p>
@@ -26,10 +24,10 @@ export default function AboutPage() {
             honouring the city that shaped and fuelled us.
           </p>
         </div>
-        <div className="relative aspect-square overflow-hidden rounded-2xl">
+        <div className="relative aspect-[3/4] overflow-hidden rounded-2xl">
           <Image
-            src="/about-us.png"
-            alt="Flora and Clara, the makers of Charah"
+            src="/about-us.jpg"
+            alt="Flora and Clara on a Brooklyn rooftop with a bowl of char siu pork and bottles of Charah sauce"
             fill
             className="object-cover"
             sizes="(min-width: 768px) 45vw, 90vw"

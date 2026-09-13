@@ -20,10 +20,10 @@ export function StoryTeaser() {
       </div>
       <div className="relative h-[360px] overflow-hidden rounded-2xl md:h-[440px]">
         <Image
-          src="/about-us.png"
-          alt="Flora and Clara, the makers of Charah"
+          src="/about-us.jpg"
+          alt="Flora and Clara on a Brooklyn rooftop with a bowl of char siu pork and bottles of Charah sauce"
           fill
-          className="object-cover object-top"
+          className="object-cover object-[center_20%]"
           sizes="(min-width: 768px) 45vw, 90vw"
         />
       </div>

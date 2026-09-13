@@ -13,7 +13,7 @@ export const home = {
   },
   storyTeaser: {
     eyebrow: "Our story",
-    heading: "Two Hong Kongers, one Brooklyn kitchen.",
+    heading: "Two Hong Kongers in Brooklyn.",
     body: "We're Flora and Clara. We share deep roots in Hong Kong, were globally raised, and are now proudly rooted in Brooklyn. Charah is our way of honouring the city that shaped and fuelled us.",
     cta: { label: "Read our story", href: "/about" },
   },

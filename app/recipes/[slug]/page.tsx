@@ -3,6 +3,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { buildMetadata } from "@/lib/seo"
 import { getRecipe, recipes, totalMinutes } from "@/content/recipes"
+import { layoutSteps } from "@/lib/recipe-steps"
 
 export function generateStaticParams() {
   return recipes.map((r) => ({ slug: r.slug }))
@@ -56,8 +57,15 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         </div>
       </dl>
 
-      <div className="relative mt-8 aspect-[3/2] overflow-hidden rounded-2xl bg-charah-hairline">
-        <Image src={recipe.image} alt={recipe.imageAlt} fill priority className="object-cover" sizes="(min-width: 768px) 720px, 90vw" />
+      <div className="relative mx-auto mt-8 aspect-[3/4] max-w-lg overflow-hidden rounded-2xl bg-charah-hairline">
+        <Image
+          src={recipe.image}
+          alt={recipe.imageAlt}
+          fill
+          priority
+          className="object-cover object-bottom"
+          sizes="(min-width: 640px) 512px, 90vw"
+        />
       </div>
 
       {recipe.draft ? (
@@ -101,11 +109,31 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
 
         <section>
           <h2 className="font-serif text-h3 text-charah-ink">Method</h2>
-          <ol className="mt-3 space-y-4 text-body text-charah-ink">
-            {recipe.steps.map((step, i) => (
+          <ol className="mt-3 space-y-5 text-body text-charah-ink">
+            {layoutSteps(recipe.steps).map((block, i) => (
               <li key={i} className="flex gap-3">
-                <span className="font-display text-h4 leading-none text-charah-red">{i + 1}</span>
-                <span className="text-charah-stone">{step}</span>
+                <span className="font-display text-h4 leading-none text-charah-red">{block.label}</span>
+                <div className="flex-1">
+                  {block.heading ? (
+                    <p className="font-serif text-h4 text-charah-ink">{block.heading}</p>
+                  ) : null}
+                  {block.kind === "step" ? (
+                    <span className={block.heading ? "mt-1 block text-charah-stone" : "text-charah-stone"}>
+                      {block.text}
+                    </span>
+                  ) : (
+                    <ul className="mt-1.5 space-y-1.5 text-charah-stone">
+                      {block.items.map((item, j) => (
+                        <li key={j} className="flex gap-2">
+                          <span aria-hidden className="text-charah-red">
+                            &bull;
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
               </li>
             ))}
           </ol>
