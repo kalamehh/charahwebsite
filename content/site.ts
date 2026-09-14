@@ -12,7 +12,7 @@ export const site = {
 
 /** Primary nav — used in the header and mirrored in the footer. */
 export const nav: { label: string; href: string }[] = [
-  { label: "About Us", href: "/about" },
+  { label: "Our Story", href: "/about" },
   { label: "Store Locator", href: "/store-locator" },
   { label: "Recipes", href: "/recipes" },
   { label: "Get In Touch", href: "/contact" },
@@ -28,7 +28,7 @@ export const footerGroups: { title: string; links: { label: string; href: string
     links: [
       { label: "Recipes", href: "/recipes" },
       { label: "Store Locator", href: "/store-locator" },
-      { label: "About Us", href: "/about" },
+      { label: "Our Story", href: "/about" },
       { label: "Get In Touch", href: "/contact" },
     ],
   },
