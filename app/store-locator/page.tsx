@@ -63,8 +63,11 @@ export default function WhereToBuyPage() {
 
         <p className="mt-12 text-body-sm text-charah-stone">
           Own a shop and want to carry Charah? Email{" "}
-          <a href="mailto:hello@charah-foods.com" className="font-medium text-charah-red underline underline-offset-4">
-            hello@charah-foods.com
+          <a
+            href="mailto:wholesale@charah-foods.com"
+            className="font-medium text-charah-red underline underline-offset-4"
+          >
+            wholesale@charah-foods.com
           </a>
           .
         </p>
