@@ -36,6 +36,8 @@ export const stockists: Stockist[] = [
     url: "http://www.kamman.com/chinatown",
     lat: 40.7168553,
     lng: -73.9983507,
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=New+Kam+Man+Supermarket,+200+Canal+St,+Manhattan,+NY&query_place_id=ChIJGzxzbidawokR9vNKERzJCog",
     carries: ["original", "chili-oil"],
   },
   {
@@ -49,6 +51,7 @@ export const stockists: Stockist[] = [
     url: "https://www.pearlriver.com",
     lat: 40.7204665,
     lng: -74.0007941,
+    mapUrl: "https://maps.app.goo.gl/4Aj8fUhZSn7Q6m6s7",
     carries: ["original", "chili-oil"],
   },
   {
@@ -62,19 +65,25 @@ export const stockists: Stockist[] = [
     url: "https://www.pearlriver.com",
     lat: 40.7420513,
     lng: -74.0048973,
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Pearl+River+Mart+Foods,+75+9th+Ave,+New+York,+NY+10011",
     carries: ["original", "chili-oil"],
   },
   {
+    // Corrected from "765 Fulton St" — that's the adjacent Greene Grape Wine &
+    // Spirits; the grocery (Provisions) is next door at 767.
     name: "Greene Grape Provisions",
     type: "retail",
-    address: "765 Fulton St",
+    address: "767 Fulton St",
     city: "Brooklyn",
     state: "NY",
     zip: "11217",
     region: "Fort Greene",
     url: "https://greenegrape.com",
-    lat: 40.6863201,
-    lng: -73.9739991,
+    lat: 40.686288,
+    lng: -73.973961,
+    mapUrl:
+      "https://www.google.com/maps/place/Greene+Grape+Provisions/@40.686288,-73.9765359,17z/data=!3m1!4b1!4m6!3m5!1s0x89c25bb04dab08cb:0x8ff8888948cef724!8m2!3d40.686288!4d-73.973961!16s/g/1tczftwg",
     carries: ["original"],
   },
   {
@@ -88,19 +97,23 @@ export const stockists: Stockist[] = [
     url: "https://myrtlewombat.com",
     lat: 40.6941892,
     lng: -73.9608979,
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Myrtle+Wombat,+581+Myrtle+Ave,+Brooklyn,+NY+11205",
     carries: ["original", "chili-oil"],
   },
   {
+    // Corrected from "460 Main St, Beacon" — the shop is actually in Cold
+    // Spring, not Beacon.
     name: "Marbled Meat Shop",
     type: "retail",
-    address: "460 Main St",
-    city: "Beacon",
+    address: "3091 US-9, Ste 101",
+    city: "Cold Spring",
     state: "NY",
-    zip: "12508",
+    zip: "10516",
     region: "Hudson Valley",
-    url: "https://www.marbledmeatshop.com",
-    lat: 41.5021202,
-    lng: -73.9648164,
+    url: "https://marbledmeatshop.com",
+    lat: 41.420094,
+    lng: -73.954583,
+    mapUrl: "https://www.google.com/maps?cid=18440461032392624536",
     mapHidden: true,
     carries: ["original"],
   },
