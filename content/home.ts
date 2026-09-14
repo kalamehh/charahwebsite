@@ -14,7 +14,7 @@ export const home = {
   storyTeaser: {
     eyebrow: "Our story",
     heading: "Two Hong Kongers in Brooklyn.",
-    body: "We're Flora and Clara. We share deep roots in Hong Kong, were globally raised, and are now proudly rooted in Brooklyn. Charah is our way of honouring the city that shaped and fuelled us.",
+    body: "We are Clara and Flora. Two friends so obsessed with char siu that we spent five years creating the perfect sauce, so you don't have to.",
     cta: { label: "Read our story", href: "/about" },
   },
   stockistsTeaser: {
