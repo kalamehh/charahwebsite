@@ -14,7 +14,7 @@ export default function AboutPage() {
         <h1 className="text-eyebrow font-semibold uppercase text-charah-red">Our Story</h1>
       </div>
       <div className="container grid items-start gap-10 py-section md:grid-cols-2 md:gap-16">
-        <div className="space-y-5 text-body-lg text-charah-stone">
+        <div className="order-2 space-y-5 text-body-lg text-charah-stone md:order-none">
           <p>
             We are Clara and Flora. We are close friends who grew up in Hong Kong, lived
             internationally, and are now based in Brooklyn, New York.
@@ -58,7 +58,7 @@ export default function AboutPage() {
             <p className="text-body-sm text-charah-stone">Your Makers at Charah</p>
           </div>
         </div>
-        <div className="relative aspect-[3/4] overflow-hidden rounded-2xl md:sticky md:top-24">
+        <div className="order-1 relative aspect-[3/4] overflow-hidden rounded-2xl md:sticky md:top-24 md:order-none">
           <Image
             src="/about-us.jpg"
             alt="Flora and Clara on a Brooklyn rooftop with a bowl of char siu pork and bottles of Charah sauce"
