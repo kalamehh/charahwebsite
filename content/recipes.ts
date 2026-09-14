@@ -46,7 +46,7 @@ export const recipes: Recipe[] = [
     title: "Classic Char Siu Pork",
     slug: "classic-char-siu-pork",
     description:
-      "Sticky, lacquered Cantonese barbecue pork made at home with one bottle of Char Siu BBQ Sauce — no bricks of red bean curd to hunt down.",
+      "Sticky, lacquered Cantonese barbecue pork made at home with just one bottle of Char Siu BBQ Sauce.",
     image: "/headline.png",
     imageAlt: "Sliced char siu pork with a glossy red glaze over rice",
     product: ["original"],
