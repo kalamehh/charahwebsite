@@ -16,7 +16,7 @@ export default function RecipesPage() {
       <PageHeader
         eyebrow="From the kitchen"
         title="Recipes"
-        intro="Start with the classic, then branch out. Filters and more recipes are on the way."
+        intro="More recipes are on the way."
       />
       <div className="container grid gap-8 py-section sm:grid-cols-2 lg:grid-cols-3">
         {recipes.map((recipe) => (
