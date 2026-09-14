@@ -13,9 +13,7 @@ export function SiteFooter() {
             <Image src="/logo.png" alt="" width={32} height={32} className="scale-110" />
             <Image src="/charah-text.png" alt={site.name} width={78} height={20} className="object-contain" />
           </div>
-          <p className="max-w-xs text-body-sm leading-relaxed text-charah-cream/70">
-            {site.tagline} A five-years-in-the-making char siu marinade and a small-batch chili oil.
-          </p>
+          <p className="max-w-xs text-body-sm leading-relaxed text-charah-cream/70">{site.tagline}</p>
           <p className="text-body-sm text-charah-cream/50">
             &copy; {year} {site.name}. All rights reserved.
           </p>

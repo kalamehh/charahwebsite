@@ -1,3 +1,4 @@
+import { Instagram } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
 import { buildMetadata } from "@/lib/seo"
 import { site, social } from "@/content/site"
@@ -29,23 +30,24 @@ export default function ContactPage() {
           </div>
           <div>
             <h2 className="font-serif text-h4 text-charah-ink">Follow along</h2>
-            <ul className="mt-1 space-y-1">
+            {/* Icon-only, matched to the platform — swap the icon if a non-Instagram
+                entry is ever added to content/site.ts's `social`. */}
+            <div className="mt-2 flex gap-3">
               {social.map((s) => (
-                <li key={s.href}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-body-lg text-charah-red underline underline-offset-4 hover:text-charah-red-dark"
-                  >
-                    {s.label}
-                  </a>
-                </li>
+                <a
+                  key={s.href}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charah-hairline text-charah-red transition-colors hover:border-charah-red hover:bg-charah-red hover:text-charah-cream"
+                >
+                  <Instagram className="h-5 w-5" />
+                </a>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
-        <p className="mt-10 text-body-sm text-charah-stone">A contact form lands here in Phase 2.</p>
       </div>
     </>
   )

@@ -70,14 +70,6 @@ export function SiteHeader() {
                     </Link>
                   </SheetClose>
                 ))}
-                <SheetClose asChild>
-                  <Link
-                    href="/contact"
-                    className="rounded-md px-3 py-3 font-serif text-h3 text-charah-ink transition-colors hover:text-charah-red"
-                  >
-                    Contact
-                  </Link>
-                </SheetClose>
               </nav>
             </SheetContent>
           </Sheet>

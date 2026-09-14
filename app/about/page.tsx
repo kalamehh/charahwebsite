@@ -14,7 +14,7 @@ export default function AboutPage() {
         <h1 className="text-eyebrow font-semibold uppercase text-charah-red">Our Story</h1>
       </div>
       <div className="container grid items-start gap-10 py-section md:grid-cols-2 md:gap-16">
-        <div className="order-2 space-y-5 text-body-lg text-charah-stone md:order-none">
+        <div className="order-2 space-y-5 font-serif text-body-lg leading-relaxed text-charah-ink/80 md:order-none">
           <p>
             We are Clara and Flora. We are close friends who grew up in Hong Kong, lived
             internationally, and are now based in Brooklyn, New York.
@@ -53,9 +53,9 @@ export default function AboutPage() {
             Born in Hong Kong. Made in Brooklyn. We are just getting started and excited to bring
             you on our journey!
           </p>
-          <div className="pt-2">
-            <p className="font-serif text-h4 text-charah-ink">Clara &amp; Flora</p>
-            <p className="text-body-sm text-charah-stone">Your Makers at Charah</p>
+          <div className="pt-4">
+            <p className="font-serif text-h3 italic text-charah-ink">Clara &amp; Flora</p>
+            <p className="text-body-sm not-italic text-charah-stone">Your Makers at Charah</p>
           </div>
         </div>
         <div className="order-1 relative aspect-[3/4] overflow-hidden rounded-2xl md:sticky md:top-24 md:order-none">
