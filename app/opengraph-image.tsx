@@ -30,77 +30,99 @@ export default async function OpengraphImage() {
   // logoLine renders with textTransform: uppercase, so the font needs its
   // uppercase glyphs, not the mixed-case glyphs of the original string.
   const bodyText = `${home.hero.logoLine.toUpperCase()}${home.hero.sub}`
-  const [heroImage, antonFont, interFont] = await Promise.all([
+  const [heroImage, logoMark, logoText, antonFont, interFont] = await Promise.all([
     readFile(path.join(process.cwd(), "public", "saucestock.jpg")),
+    readFile(path.join(process.cwd(), "public", "logo.png")),
+    readFile(path.join(process.cwd(), "public", "charah-text.png")),
     loadGoogleFont("Anton", headline),
     loadGoogleFont("Inter", bodyText),
   ])
   const heroImageSrc = `data:image/jpeg;base64,${heroImage.toString("base64")}`
+  const logoMarkSrc = `data:image/png;base64,${logoMark.toString("base64")}`
+  const logoTextSrc = `data:image/png;base64,${logoText.toString("base64")}`
+
+  const bannerHeight = 112
 
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", background: "#5E4E40" }}>
-        <img
-          src={heroImageSrc}
-          width={1200}
-          height={630}
-          style={{ position: "absolute", inset: 0, objectFit: "cover" }}
-        />
-        {/* Scrim — same top-down fade as the site's hero, so text stays legible over the photo. */}
+      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", background: "#5E4E40" }}>
+        {/* Header banner — same cream bar + logo lockup as SiteHeader, sitting above the photo. */}
         <div
           style={{
-            position: "absolute",
-            inset: 0,
             display: "flex",
-            background:
-              "linear-gradient(to bottom, rgba(14,11,10,0.82) 0%, rgba(14,11,10,0.5) 45%, rgba(14,11,10,0.05) 75%)",
-          }}
-        />
-        <div
-          style={{
-            position: "relative",
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            padding: "72px 80px",
+            alignItems: "center",
+            gap: 18,
+            height: bannerHeight,
+            padding: "0 80px",
+            background: "#FBF6EF",
+            borderBottom: "1px solid #E7DED2",
           }}
         >
+          <img src={logoMarkSrc} width={58} height={55} style={{ display: "flex" }} />
+          <img src={logoTextSrc} width={124} height={59} style={{ display: "flex" }} />
+        </div>
+
+        <div style={{ position: "relative", display: "flex", width: "100%", height: 630 - bannerHeight }}>
+          <img
+            src={heroImageSrc}
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+          />
+          {/* Scrim — same top-down fade as the site's hero, so text stays legible over the photo. */}
           <div
             style={{
+              position: "absolute",
+              inset: 0,
               display: "flex",
-              fontSize: 26,
-              letterSpacing: 5,
-              textTransform: "uppercase",
-              color: "#FBF6EF",
-              opacity: 0.9,
-              fontFamily: "Inter",
+              background:
+                "linear-gradient(to bottom, rgba(14,11,10,0.82) 0%, rgba(14,11,10,0.5) 45%, rgba(14,11,10,0.05) 75%)",
             }}
-          >
-            {home.hero.logoLine}
-          </div>
+          />
           <div
             style={{
+              position: "relative",
               display: "flex",
-              marginTop: 20,
-              fontSize: 96,
-              lineHeight: 1.02,
-              color: "#FBF6EF",
-              fontFamily: "Anton",
-              textTransform: "uppercase",
+              flexDirection: "column",
+              width: "100%",
+              padding: "56px 80px",
             }}
           >
-            {headline}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              marginTop: 20,
-              fontSize: 36,
-              color: "rgba(251,246,239,0.8)",
-              fontFamily: "Inter",
-            }}
-          >
-            {home.hero.sub}
+            <div
+              style={{
+                display: "flex",
+                fontSize: 26,
+                letterSpacing: 5,
+                textTransform: "uppercase",
+                color: "#FBF6EF",
+                opacity: 0.9,
+                fontFamily: "Inter",
+              }}
+            >
+              {home.hero.logoLine}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                marginTop: 20,
+                fontSize: 92,
+                lineHeight: 1.02,
+                color: "#FBF6EF",
+                fontFamily: "Anton",
+                textTransform: "uppercase",
+              }}
+            >
+              {headline}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                marginTop: 18,
+                fontSize: 34,
+                color: "rgba(251,246,239,0.8)",
+                fontFamily: "Inter",
+              }}
+            >
+              {home.hero.sub}
+            </div>
           </div>
         </div>
       </div>
