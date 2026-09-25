@@ -211,7 +211,7 @@ export const recipes: Recipe[] = [
     title: "Charah Tofu Stir Fry",
     slug: "char-siu-tofu",
     description:
-      "Pressed firm tofu, seared until crisp and glazed with char siu — fully plant-based. Pan-fry it fast, or bake/air-fry hands-off.",
+      "Plant-based char siu — Charah sauce and chili oil cling to tofu beautifully. Your every day dinner in less than 30 minutes.",
     image: "/char-siu-tofu.jpg",
     imageAlt: "Diced char siu tofu with scallions in a skillet",
     imagePosition: "center 65%",
@@ -244,8 +244,7 @@ export const recipes: Recipe[] = [
         items: [
           "Cut tofu into 1/2 inch cubes and press dry.",
           "Toss tofu cubes with 1 tbsp neutral oil.",
-          "Add salt, black pepper and cornstarch. Try to sprinkle or dust in cornstarch so it sticks to the tofu instead of clumping together.",
-          "Toss or mix.",
+          "Add salt, black pepper and cornstarch. Try to sprinkle or dust in cornstarch so it sticks to the tofu instead of clumping together. Toss or mix.",
         ],
       },
       {
