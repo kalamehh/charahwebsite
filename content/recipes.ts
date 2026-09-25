@@ -265,24 +265,45 @@ export const recipes: Recipe[] = [
     ],
   },
   {
-    title: "Charah Bacon",
+    title: "Char Siu Bacon",
     slug: "charah-bacon",
     description:
-      "Thick-cut bacon brushed with char siu marinade and baked low until candied at the edges. Dangerous at brunch.",
-    image: PLACEHOLDER_IMAGE,
-    imageAlt: "Char siu candied bacon",
+      "Char siu bacon is the only candied bacon you will ever need. Dangerous at brunch.",
+    image: "/charah-bacon.jpg",
+    imageAlt: "Char siu candied bacon on an egg and bagel sandwich",
+    imagePosition: "center 75%",
     product: ["original"],
     protein: "pork",
     meal: "breakfast",
     difficulty: "easy",
-    prepMinutes: 5,
-    cookMinutes: 20,
+    prepMinutes: 0,
+    cookMinutes: 10,
     servings: 4,
     tags: ["breakfast", "brunch", "quick", "3-ingredient"],
-    intro: "Char siu marinade turns thick-cut bacon into candied, sticky, sweet-savoury strips.",
-    ingredients: [],
-    steps: [],
-    draft: true,
+    intro: "Char siu bacon is the candied bacon you never knew you need. Warning: extremely dangerous at brunch.",
+    ingredients: [
+      {
+        items: [
+          "8 slices thick-cut bacon",
+          "2-3 tbsp Charah Char Siu BBQ Sauce",
+        ],
+      },
+    ],
+    steps: [
+      {
+        items: [
+          "Pre-heat pan to medium.",
+          "Put bacon in the pan in a single layer and cook until some fat is rendered out, about 2-3 minutes.",
+          "Add 2-3 tbsp of Char Siu BBQ Sauce.",
+          "Continue to cook until bacon is crispy and charred. If it's burning too fast, reduce heat.",
+          "Serve in your sandwich or with your favorite brunch dish.",
+        ],
+      },
+    ],
+    tips: [
+      "Remove some of the rendered fat before you add Charah sauce.",
+      "Watch closely; it can go from charred to burnt really fast.",
+    ],
   },
   {
     title: "Charah Burger",
