@@ -13,6 +13,25 @@ const SHIPPO_API = "https://api.goshippo.com"
 
 export const SHIPPO_ENABLED = Boolean(process.env.SHIPPO_API_KEY)
 
+/**
+ * Where every order ships from. Shippo's dashboard shows your account's
+ * default sender address on any order as a display fallback even when the
+ * order itself has no from_address -- which looks correct but isn't: rate
+ * shopping needs a real from_address actually attached to the order, not
+ * just a UI fallback. Confirmed by testing: a manually-created order (which
+ * the dashboard forces you to attach a sender to) got rates fine; an
+ * API-created order without this didn't, with no address-related error --
+ * it just silently came back "Rates unavailable."
+ */
+const FROM_ADDRESS: ShippoAddress = {
+  name: "Charah Foods LLC",
+  street1: "287 Pacific St",
+  city: "Brooklyn",
+  state: "NY",
+  zip: "11201",
+  country: "US",
+}
+
 export type ShippoAddress = {
   name: string
   street1: string
@@ -96,6 +115,7 @@ export async function createShippoOrder(input: CreateShippoOrderInput) {
       order_status: "PAID",
       placed_at: input.placedAt,
       to_address: input.toAddress,
+      from_address: FROM_ADDRESS,
       line_items: input.lineItems,
       weight: String(input.weightOz),
       weight_unit: "oz",
