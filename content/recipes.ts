@@ -66,7 +66,7 @@ export const recipes: Recipe[] = [
       {
         items: [
           "3 lb boneless pork shoulder (butt), cut into 2-inch-thick strips",
-          "1/3 cup Charah Char Siu BBQ Sauce",
+          "1/2 cup Charah Char Siu BBQ Sauce (save 1 tbsp for basting if doing)",
         ],
       },
     ],
@@ -168,7 +168,7 @@ export const recipes: Recipe[] = [
       {
         items: [
           "2 lbs boneless, skinless chicken thighs",
-          "1/4 cup Charah Char Siu BBQ Sauce, plus more for basting",
+          "1/3 cup Charah Char Siu BBQ Sauce (save 1 tbsp for basting)",
         ],
       },
     ],
@@ -268,7 +268,7 @@ export const recipes: Recipe[] = [
     title: "Char Siu Bacon",
     slug: "charah-bacon",
     description:
-      "Char siu bacon is the only candied bacon you will ever need. Dangerous at brunch.",
+      "Char siu bacon is the candied bacon you never knew you need. Dangerously addictive at brunch.",
     image: "/charah-bacon.jpg",
     imageAlt: "Char siu candied bacon on an egg and bagel sandwich",
     imagePosition: "center 75%",
@@ -280,7 +280,7 @@ export const recipes: Recipe[] = [
     cookMinutes: 10,
     servings: 4,
     tags: ["breakfast", "brunch", "quick", "3-ingredient"],
-    intro: "Char siu bacon is the candied bacon you never knew you need. Warning: extremely dangerous at brunch.",
+    intro: "Char siu bacon is the candied bacon you never knew you need. Dangerously addictive at brunch.",
     ingredients: [
       {
         items: [

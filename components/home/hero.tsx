@@ -1,9 +1,15 @@
 import Image from "next/image"
 import Link from "next/link"
 import { home } from "@/content/home"
+import { PREVIEW_LIMITED } from "@/lib/preview"
 
 export function Hero() {
   const { hero } = home
+  // The shop isn't shown in limited-preview mode — point the primary CTA
+  // at the store locator instead.
+  const ctaPrimary = PREVIEW_LIMITED
+    ? { label: "Find a store", href: "/store-locator" }
+    : hero.ctaPrimary
 
   return (
     <section className="relative isolate flex min-h-[88svh] items-stretch overflow-hidden bg-charah-brownstone mb-[-1px] sm:h-[90vh] sm:min-h-[600px]">
@@ -34,10 +40,10 @@ export function Hero() {
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
           <Link
-            href={hero.ctaPrimary.href}
+            href={ctaPrimary.href}
             className="rounded-lg bg-charah-red px-5 py-3 text-body-sm font-semibold text-charah-cream transition-colors hover:bg-charah-red-dark"
           >
-            {hero.ctaPrimary.label}
+            {ctaPrimary.label}
           </Link>
           <Link
             href={hero.ctaSecondary.href}
