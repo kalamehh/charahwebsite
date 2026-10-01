@@ -22,18 +22,27 @@ export const SHIPPO_ENABLED = Boolean(process.env.SHIPPO_API_KEY)
  * the dashboard forces you to attach a sender to) got rates fine; an
  * API-created order without this didn't, with no address-related error --
  * it just silently came back "Rates unavailable."
+ *
+ * phone matters too, not just presence of an address -- Shippo's own
+ * "is_complete" check on an address only validates that it geocodes, but
+ * USPS's live rate quote can still fail without a contact phone on the
+ * origin address even though Shippo doesn't flag that as incomplete.
  */
 const FROM_ADDRESS: ShippoAddress = {
   name: "Charah Foods LLC",
+  company: "Charah Foods LLC",
   street1: "287 Pacific St",
+  zip: "11201-7513",
   city: "Brooklyn",
   state: "NY",
-  zip: "11201",
   country: "US",
+  phone: "9176799226",
+  email: "orders@charah-foods.com",
 }
 
 export type ShippoAddress = {
   name: string
+  company?: string
   street1: string
   street2?: string
   city: string
