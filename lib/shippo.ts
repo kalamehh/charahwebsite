@@ -29,14 +29,15 @@ export const SHIPPO_ENABLED = Boolean(process.env.SHIPPO_API_KEY)
  * origin address even though Shippo doesn't flag that as incomplete.
  */
 const FROM_ADDRESS: ShippoAddress = {
-  name: "Charah Foods LLC",
-  company: "Charah Foods LLC",
-  street1: "287 Pacific St",
-  zip: "11201-7513",
+  name: "Charah Foods",
+  company: "Charah Foods",
+  street1: "55 Fleet St",
+  street2: "Apt 19H",
   city: "Brooklyn",
   state: "NY",
+  zip: "11201",
   country: "US",
-  phone: "9176799226",
+  phone: "617-615-2462",
   email: "orders@charah-foods.com",
 }
 
