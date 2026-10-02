@@ -82,7 +82,7 @@ function centsToStr(cents: number): string {
   return (cents / 100).toFixed(2)
 }
 
-async function shippoFetch(path: string, init?: RequestInit) {
+async function shippoFetch(path: string, init?: RequestInit, meta?: { status?: number }) {
   const key = process.env.SHIPPO_API_KEY
   if (!key) throw new Error("SHIPPO_API_KEY is not set")
   const res = await fetch(`${SHIPPO_API}${path}`, {
@@ -93,12 +93,74 @@ async function shippoFetch(path: string, init?: RequestInit) {
       ...init?.headers,
     },
   })
+  if (meta) meta.status = res.status
   if (!res.ok) {
     const body = await res.text().catch(() => "")
     throw new Error(`Shippo ${path} -> ${res.status}: ${body.slice(0, 500)}`)
   }
   return res.json()
 }
+
+// ---- TEMPORARY DIAGNOSTICS (remove once the "Rates Unavailable" issue is resolved) ----
+// Logs what Shippo actually persisted for an order created by this code, to
+// compare against an identical order created from outside Vercel. Read-only:
+// never alters the request, never throws, never logs credentials.
+
+const REDACT_KEYS = new Set([
+  "name", "company", "street_no", "street1", "street2", "street3",
+  "city", "zip", "phone", "email", "latitude", "longitude", "notes",
+])
+
+/** Replaces non-empty values of PII keys with "[REDACTED]" but keeps the key, and keeps ""/null so emptiness stays visible. */
+function redact(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(redact)
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value as Record<string, unknown>).map(([k, v]) => {
+        if (REDACT_KEYS.has(k) && typeof v === "string" && v !== "") return [k, "[REDACTED]"]
+        if (REDACT_KEYS.has(k) && typeof v === "number") return [k, "[REDACTED]"]
+        return [k, redact(v)]
+      }),
+    )
+  }
+  return value
+}
+
+async function logPersistedOrder(requestBody: string, postStatus: number | undefined, created: unknown) {
+  try {
+    const orderId = (created as { object_id?: string } | null)?.object_id
+    const getMeta: { status?: number } = {}
+    let stored: unknown = null
+    let getError: string | undefined
+    if (orderId) {
+      try {
+        stored = await shippoFetch(`/orders/${orderId}`, undefined, getMeta)
+      } catch (e) {
+        getError = e instanceof Error ? e.message.replace(/ShippoToken\s+\S+/g, "ShippoToken [redacted]") : String(e)
+      }
+    }
+    console.log(
+      "[shippo-diag] " +
+        JSON.stringify({
+          timestamp: new Date().toISOString(),
+          vercelEnv: process.env.VERCEL_ENV ?? null,
+          vercelRegion: process.env.VERCEL_REGION ?? null,
+          isVercelProduction: process.env.VERCEL_ENV === "production",
+          postStatus: postStatus ?? null,
+          getStatus: getMeta.status ?? null,
+          getError: getError ?? null,
+          orderId: orderId ?? null,
+          orderNumber: (created as { order_number?: string } | null)?.order_number ?? null,
+          postResponseTopLevelKeys: created && typeof created === "object" ? Object.keys(created) : null,
+          postRequestBody: redact(JSON.parse(requestBody)),
+          getResponse: redact(stored),
+        }),
+    )
+  } catch (e) {
+    console.log("[shippo-diag] diagnostic logging failed:", e instanceof Error ? e.message : String(e))
+  }
+}
+// ---- END TEMPORARY DIAGNOSTICS ----
 
 async function orderExists(orderNumber: string): Promise<boolean> {
   // Shippo's /orders/ list endpoint does NOT actually filter by the
@@ -118,24 +180,27 @@ export async function createShippoOrder(input: CreateShippoOrderInput) {
   if (!SHIPPO_ENABLED) return null
   if (await orderExists(input.orderNumber)) return null
 
-  return shippoFetch("/orders/", {
-    method: "POST",
-    body: JSON.stringify({
-      order_number: input.orderNumber,
-      order_status: "PAID",
-      placed_at: input.placedAt,
-      to_address: input.toAddress,
-      from_address: FROM_ADDRESS,
-      line_items: input.lineItems,
-      weight: String(input.weightOz),
-      weight_unit: "oz",
-      subtotal_price: centsToStr(input.subtotalCents),
-      shipping_cost: centsToStr(input.shippingCents),
-      shipping_cost_currency: "USD",
-      shipping_method: "Standard (3-7 business days)",
-      total_tax: centsToStr(input.taxCents),
-      total_price: centsToStr(input.totalCents),
-      currency: "USD",
-    }),
+  const body = JSON.stringify({
+    order_number: input.orderNumber,
+    order_status: "PAID",
+    placed_at: input.placedAt,
+    to_address: input.toAddress,
+    from_address: FROM_ADDRESS,
+    line_items: input.lineItems,
+    weight: String(input.weightOz),
+    weight_unit: "oz",
+    subtotal_price: centsToStr(input.subtotalCents),
+    shipping_cost: centsToStr(input.shippingCents),
+    shipping_cost_currency: "USD",
+    shipping_method: "Standard (3-7 business days)",
+    total_tax: centsToStr(input.taxCents),
+    total_price: centsToStr(input.totalCents),
+    currency: "USD",
   })
+
+  const postMeta: { status?: number } = {}
+  const created = await shippoFetch("/orders/", { method: "POST", body }, postMeta)
+
+  await logPersistedOrder(body, postMeta.status, created) // TEMPORARY diagnostic; never throws
+  return created
 }
