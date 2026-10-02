@@ -129,7 +129,7 @@ export async function POST(req: Request) {
       // back to 16oz each rather than failing the whole order.
       const weightOz = items.reduce((sum, i) => sum + (i.sellable?.shipWeightOz ?? 16) * i.qty, 0)
       await createShippoOrder({
-        orderNumber: session.id,
+        stripeSessionId: session.id,
         placedAt: new Date((session.created ?? Date.now() / 1000) * 1000).toISOString(),
         toAddress: {
           name: shippingAddress.name || customerEmail || "Charah customer",

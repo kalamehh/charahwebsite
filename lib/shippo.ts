@@ -14,19 +14,12 @@ const SHIPPO_API = "https://api.goshippo.com"
 export const SHIPPO_ENABLED = Boolean(process.env.SHIPPO_API_KEY)
 
 /**
- * Where every order ships from. Shippo's dashboard shows your account's
- * default sender address on any order as a display fallback even when the
- * order itself has no from_address -- which looks correct but isn't: rate
- * shopping needs a real from_address actually attached to the order, not
- * just a UI fallback. Confirmed by testing: a manually-created order (which
- * the dashboard forces you to attach a sender to) got rates fine; an
- * API-created order without this didn't, with no address-related error --
- * it just silently came back "Rates unavailable."
+ * Where every order ships from, attached explicitly to each order rather
+ * than relying on the dashboard's display of the account's default sender.
  *
- * phone matters too, not just presence of an address -- Shippo's own
- * "is_complete" check on an address only validates that it geocodes, but
- * USPS's live rate quote can still fail without a contact phone on the
- * origin address even though Shippo doesn't flag that as incomplete.
+ * Note: this was originally added as the fix for "Rates Unavailable", but it
+ * wasn't the cause -- the real cause was the order_number (see
+ * shippoOrderNumber below).
  */
 const FROM_ADDRESS: ShippoAddress = {
   name: "Charah Foods",
@@ -63,10 +56,11 @@ export type ShippoLineItem = {
 }
 
 export type CreateShippoOrderInput = {
-  /** Used as Shippo's order_number — the Stripe Checkout Session id. Also
-   *  doubles as the idempotency key: if an order with this number already
-   *  exists, we skip creating a duplicate (safe against webhook retries). */
-  orderNumber: string
+  /** The Stripe Checkout Session id. Shippo's order_number is derived from it
+   *  (see shippoOrderNumber) and doubles as the idempotency key: if an order
+   *  with that number already exists, we skip creating a duplicate (safe
+   *  against webhook retries). The full id goes in the order's notes. */
+  stripeSessionId: string
   placedAt: string
   toAddress: ShippoAddress
   lineItems: ShippoLineItem[]
@@ -82,7 +76,7 @@ function centsToStr(cents: number): string {
   return (cents / 100).toFixed(2)
 }
 
-async function shippoFetch(path: string, init?: RequestInit, meta?: { status?: number }) {
+async function shippoFetch(path: string, init?: RequestInit) {
   const key = process.env.SHIPPO_API_KEY
   if (!key) throw new Error("SHIPPO_API_KEY is not set")
   const res = await fetch(`${SHIPPO_API}${path}`, {
@@ -93,74 +87,12 @@ async function shippoFetch(path: string, init?: RequestInit, meta?: { status?: n
       ...init?.headers,
     },
   })
-  if (meta) meta.status = res.status
   if (!res.ok) {
     const body = await res.text().catch(() => "")
     throw new Error(`Shippo ${path} -> ${res.status}: ${body.slice(0, 500)}`)
   }
   return res.json()
 }
-
-// ---- TEMPORARY DIAGNOSTICS (remove once the "Rates Unavailable" issue is resolved) ----
-// Logs what Shippo actually persisted for an order created by this code, to
-// compare against an identical order created from outside Vercel. Read-only:
-// never alters the request, never throws, never logs credentials.
-
-const REDACT_KEYS = new Set([
-  "name", "company", "street_no", "street1", "street2", "street3",
-  "city", "zip", "phone", "email", "latitude", "longitude", "notes",
-])
-
-/** Replaces non-empty values of PII keys with "[REDACTED]" but keeps the key, and keeps ""/null so emptiness stays visible. */
-function redact(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(redact)
-  if (value && typeof value === "object") {
-    return Object.fromEntries(
-      Object.entries(value as Record<string, unknown>).map(([k, v]) => {
-        if (REDACT_KEYS.has(k) && typeof v === "string" && v !== "") return [k, "[REDACTED]"]
-        if (REDACT_KEYS.has(k) && typeof v === "number") return [k, "[REDACTED]"]
-        return [k, redact(v)]
-      }),
-    )
-  }
-  return value
-}
-
-async function logPersistedOrder(requestBody: string, postStatus: number | undefined, created: unknown) {
-  try {
-    const orderId = (created as { object_id?: string } | null)?.object_id
-    const getMeta: { status?: number } = {}
-    let stored: unknown = null
-    let getError: string | undefined
-    if (orderId) {
-      try {
-        stored = await shippoFetch(`/orders/${orderId}`, undefined, getMeta)
-      } catch (e) {
-        getError = e instanceof Error ? e.message.replace(/ShippoToken\s+\S+/g, "ShippoToken [redacted]") : String(e)
-      }
-    }
-    console.log(
-      "[shippo-diag] " +
-        JSON.stringify({
-          timestamp: new Date().toISOString(),
-          vercelEnv: process.env.VERCEL_ENV ?? null,
-          vercelRegion: process.env.VERCEL_REGION ?? null,
-          isVercelProduction: process.env.VERCEL_ENV === "production",
-          postStatus: postStatus ?? null,
-          getStatus: getMeta.status ?? null,
-          getError: getError ?? null,
-          orderId: orderId ?? null,
-          orderNumber: (created as { order_number?: string } | null)?.order_number ?? null,
-          postResponseTopLevelKeys: created && typeof created === "object" ? Object.keys(created) : null,
-          postRequestBody: redact(JSON.parse(requestBody)),
-          getResponse: redact(stored),
-        }),
-    )
-  } catch (e) {
-    console.log("[shippo-diag] diagnostic logging failed:", e instanceof Error ? e.message : String(e))
-  }
-}
-// ---- END TEMPORARY DIAGNOSTICS ----
 
 async function orderExists(orderNumber: string): Promise<boolean> {
   // Shippo's /orders/ list endpoint does NOT actually filter by the
@@ -175,13 +107,30 @@ async function orderExists(orderNumber: string): Promise<boolean> {
   return results.some((o) => o.order_number === orderNumber)
 }
 
+/**
+ * Shippo order_number for a Stripe session: "CH-" + the last 8 chars, the
+ * same short number the customer sees as "Order #" in their emails.
+ *
+ * Never use the raw Stripe session id here. Confirmed by testing: any Shippo
+ * order whose order_number is (or contains) a real cs_live_ session id shows
+ * "Rates Unavailable" on the dashboard's Buy page -- whether created by this
+ * webhook, a local script or a dashboard copy -- while the identical order
+ * under a derived number gets rates normally. A random cs_live_-shaped string
+ * did not trigger it; the cause is inside Shippo and wasn't identified.
+ */
+function shippoOrderNumber(stripeSessionId: string): string {
+  return `CH-${stripeSessionId.slice(-8)}`
+}
+
 /** Creates a Shippo Order for a paid Stripe session. No-ops if one with this order_number already exists. */
 export async function createShippoOrder(input: CreateShippoOrderInput) {
   if (!SHIPPO_ENABLED) return null
-  if (await orderExists(input.orderNumber)) return null
+  const orderNumber = shippoOrderNumber(input.stripeSessionId)
+  if (await orderExists(orderNumber)) return null
 
   const body = JSON.stringify({
-    order_number: input.orderNumber,
+    order_number: orderNumber,
+    notes: `Stripe session: ${input.stripeSessionId}`,
     order_status: "PAID",
     placed_at: input.placedAt,
     to_address: input.toAddress,
@@ -198,9 +147,5 @@ export async function createShippoOrder(input: CreateShippoOrderInput) {
     currency: "USD",
   })
 
-  const postMeta: { status?: number } = {}
-  const created = await shippoFetch("/orders/", { method: "POST", body }, postMeta)
-
-  await logPersistedOrder(body, postMeta.status, created) // TEMPORARY diagnostic; never throws
-  return created
+  return shippoFetch("/orders/", { method: "POST", body })
 }
