@@ -59,7 +59,7 @@ export function StockistMapInner({ stockists }: { stockists: Stockist[] }) {
       />
       <FitBounds points={points} />
       {located.map((s) => (
-        <Marker key={s.name} position={[s.lat, s.lng]} icon={pinIcon}>
+        <Marker key={`${s.name}-${s.address}`} position={[s.lat, s.lng]} icon={pinIcon}>
           <Popup>
             <p className="font-semibold text-charah-ink">{s.name}</p>
             <p className="text-charah-stone">

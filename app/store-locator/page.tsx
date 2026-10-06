@@ -29,7 +29,7 @@ export default function WhereToBuyPage() {
               <h2 className="font-serif text-h3 text-charah-ink">{region.region}</h2>
               <ul className="mt-4 divide-y divide-charah-hairline border-y border-charah-hairline">
                 {region.items.map((s) => (
-                  <li key={s.name} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4">
+                  <li key={`${s.name}-${s.address}`} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4">
                     <div>
                       <p className="text-body-lg font-medium text-charah-ink">
                         <a

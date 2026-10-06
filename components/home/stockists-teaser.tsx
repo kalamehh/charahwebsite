@@ -20,7 +20,7 @@ export function StockistsTeaser() {
       </div>
       <ul className="divide-y divide-charah-hairline border-y border-charah-hairline">
         {stockists.map((s) => (
-          <li key={s.name} className="flex items-baseline justify-between gap-4 py-3.5">
+          <li key={`${s.name}-${s.region}`} className="flex items-baseline justify-between gap-4 py-3.5">
             <span className="text-body font-medium text-charah-ink">{s.name}</span>
             <span className="text-body-sm text-charah-stone">{s.region}</span>
           </li>
