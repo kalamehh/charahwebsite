@@ -112,7 +112,7 @@ export const stockists: Stockist[] = [
     lat: 40.7167566,
     lng: -73.9449556,
     mapUrl: "https://www.google.com/maps/search/?api=1&query=The+Meat+Hook,+397+Graham+Ave,+Brooklyn,+NY+11211",
-    carries: ["original", "chili-oil"],
+    carries: ["original"],
   },
   {
     name: "The Meat Hook",
