@@ -70,6 +70,20 @@ export const stockists: Stockist[] = [
     carries: ["original", "chili-oil"],
   },
   {
+    name: "Eli's Market",
+    type: "retail",
+    address: "1411 Third Ave",
+    city: "New York",
+    state: "NY",
+    zip: "10028",
+    region: "Upper East Side",
+    url: "https://www.elizabar.com",
+    lat: 40.7750655,
+    lng: -73.9564976,
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Eli's+Market,+1411+Third+Ave,+New+York,+NY+10028",
+    carries: ["original", "chili-oil"],
+  },
+  {
     // Corrected from "765 Fulton St" — that's the adjacent Greene Grape Wine &
     // Spirits; the grocery (Provisions) is next door at 767.
     name: "Greene Grape Provisions",
