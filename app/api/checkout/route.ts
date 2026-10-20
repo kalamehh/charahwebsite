@@ -77,7 +77,7 @@ export async function POST(req: Request) {
             // Read back in the webhook (expanded via line_items.data.price.product)
             // to map each line item back to a slug -- e.g. for Shippo's required
             // order weight, without fragile matching on the display name.
-            metadata: { slug: sellable.slug },
+            metadata: { slug: sellable.slug, sku: sellable.sku },
             ...(allowImages ? { images: [`${origin}${sellable.image}`] } : {}),
           },
         },
@@ -102,6 +102,18 @@ export async function POST(req: Request) {
       metadata: {
         subtotal_cents: String(subtotalCents),
         shipping_cents: String(shippingCents),
+      },
+      // Order details on the *payment* (what Stripe's Payments list, CSV
+      // exports and bookkeeping integrations read) -- Checkout line items alone
+      // live only on the session. Description is shown in the Dashboard; the
+      // metadata is selectable as columns in exports: "items" is a readable
+      // summary and "qty_<SKU>" is one numeric column per product for summing.
+      payment_intent_data: {
+        description: `Charah order: ${items.map((i) => `${i.qty} x ${i.sellable.name} (${i.sellable.sku})`).join(", ")}`,
+        metadata: {
+          items: items.map((i) => `${i.sellable.sku} x${i.qty}`).join("; "),
+          ...Object.fromEntries(items.map((i) => [`qty_${i.sellable.sku}`, String(i.qty)])),
+        },
       },
       success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}${returnTo}`,

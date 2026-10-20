@@ -8,6 +8,7 @@ import { products } from "@/content/products"
 
 export type Sellable = {
   slug: string
+  sku: string
   name: string
   priceCents: number
   image: string
@@ -17,6 +18,7 @@ export type Sellable = {
 
 const sellables: Sellable[] = products.map((p) => ({
   slug: p.slug,
+  sku: p.sku,
   name: p.name,
   priceCents: p.priceCents,
   image: p.image,

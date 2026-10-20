@@ -9,6 +9,8 @@
 
 export type Product = {
   slug: "original" | "chili-oil"
+  /** Stock-keeping unit. Written onto each Stripe payment (see app/api/checkout) so bookkeeping can tell products apart -- change a value here and it applies to new orders only. */
+  sku: string
   name: string
   shortName: string
   tagline?: string
@@ -37,6 +39,7 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: "original",
+    sku: "CHARAH-BBQ-12OZ",
     name: "Char Siu BBQ Sauce",
     shortName: "BBQ Sauce",
     blurb:
@@ -61,6 +64,7 @@ export const products: Product[] = [
   },
   {
     slug: "chili-oil",
+    sku: "CHARAH-OIL-6OZ",
     name: "Cantonese Chili Oil",
     shortName: "Chili Oil",
     blurb:
