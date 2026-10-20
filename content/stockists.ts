@@ -81,7 +81,7 @@ export const stockists: Stockist[] = [
     lat: 40.6893645,
     lng: -73.9922608,
     mapUrl: "https://www.google.com/maps/search/?api=1&query=Shelsky's+of+Brooklyn,+141+Court+St,+Brooklyn,+NY+11201",
-    carries: ["original", "chili-oil"],
+    carries: ["original"],
   },
   {
     name: "Eli's Market",
