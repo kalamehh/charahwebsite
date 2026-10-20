@@ -18,7 +18,6 @@ export default function WhereToBuyPage() {
       <PageHeader
         eyebrow="Where to buy"
         title="Find Charah near you"
-        intro="We're in a handful of independent shops around New York, with more stockists and online shipping on the way."
       />
       <div className="container py-section">
         <StockistMap stockists={stockists} />
