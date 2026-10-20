@@ -6,7 +6,7 @@ import { googleMapsUrl, stockists, stockistsByRegion } from "@/content/stockists
 
 export const metadata = buildMetadata({
   title: "Store Locator",
-  description: "Independent grocers and butcher shops that carry Charah, with online shipping on the way.",
+  description: "Independent grocers and butcher shops that carry Charah.",
   path: "/store-locator",
 })
 
