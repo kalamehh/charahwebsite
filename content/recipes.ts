@@ -266,7 +266,7 @@ export const recipes: Recipe[] = [
     tips: [
       "Don't marinate longer than an hour. The sauce will start to cure the fish.",
       "Pull the salmon when the thickest part is just opaque (about 125°F for medium). It keeps cooking as it rests.",
-      "Watch closely under the broiler. The sugars go from charred to burnt quickly.",
+      "Watch closely under the broiler. It goes from charred to burnt quickly.",
     ],
   },
   {
