@@ -184,7 +184,6 @@ export const stockists: Stockist[] = [
     lat: 41.420094,
     lng: -73.954583,
     mapUrl: "https://www.google.com/maps?cid=18440461032392624536",
-    mapHidden: true,
     carries: ["original"],
   },
 ]

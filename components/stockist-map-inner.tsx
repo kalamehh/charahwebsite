@@ -19,16 +19,21 @@ const pinIcon = L.divIcon({
   popupAnchor: [0, -34],
 })
 
-/** Fits the map to every marker on first render (or when the point set changes). */
+/** The five boroughs, roughly. The opening view frames only the pins inside this box; the rest stay on the map, reachable by zooming out. */
+const NYC_BOX = L.latLngBounds([40.45, -74.3], [40.95, -73.65])
+
+/** Fits the map to the NYC pins on first render (or when the point set changes). */
 function FitBounds({ points }: { points: [number, number][] }) {
   const map = useMap()
   useEffect(() => {
     if (points.length === 0) return
-    if (points.length === 1) {
-      map.setView(points[0], 13)
+    const inNyc = points.filter((p) => NYC_BOX.contains(p))
+    const framed = inNyc.length > 0 ? inNyc : points
+    if (framed.length === 1) {
+      map.setView(framed[0], 13)
       return
     }
-    map.fitBounds(L.latLngBounds(points), { padding: [48, 48], maxZoom: 13 })
+    map.fitBounds(L.latLngBounds(framed), { padding: [48, 48], maxZoom: 13 })
   }, [map, points])
   return null
 }
