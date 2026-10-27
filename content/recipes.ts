@@ -208,6 +208,69 @@ export const recipes: Recipe[] = [
     ],
   },
   {
+    title: "Char Siu Salmon",
+    slug: "char-siu-salmon",
+    description:
+      "Salmon fillets glazed in Char Siu BBQ Sauce until sticky and charred at the edges. Dinner in 20 minutes.",
+    image: "/char-siu-salmon.jpg",
+    imageAlt: "Char siu glazed salmon with rice and bok choy, next to bottles of Charah sauce and chili oil",
+    imagePosition: "center 85%",
+    product: ["original", "chili-oil"],
+    protein: "seafood",
+    meal: "main",
+    difficulty: "easy",
+    prepMinutes: 5,
+    cookMinutes: 15,
+    servings: 4,
+    tags: ["cantonese", "oven", "weeknight", "quick", "air-fryer"],
+    intro:
+      "Rich, fatty salmon is made for char siu sauce. It caramelizes fast under high heat, so the top lacquers and chars while the inside stays tender. Serve with rice and greens for an easy weeknight dinner.",
+    ingredients: [
+      {
+        items: [
+          "4 salmon fillets (about 6 oz each), skin on or off",
+          "1/4 cup Charah Char Siu BBQ Sauce (save 1 tbsp for basting)",
+          "1 tbsp neutral oil",
+          "Charah chili oil, to serve (optional)",
+        ],
+      },
+    ],
+    steps: [
+      {
+        items: [
+          "Pat the salmon dry. Brush or rub all over with the Char Siu BBQ Sauce. Marinate 15 minutes at room temperature, or up to 1 hour in the fridge.",
+        ],
+      },
+      {
+        group: "In the oven",
+        alt: true,
+        items: [
+          "Heat the oven to 400°F. Line a sheet pan with foil and oil it lightly.",
+          "Place the salmon on the pan and roast 8-10 minutes, until just cooked through.",
+          "Brush with the reserved sauce and broil 1-2 minutes until charred in spots.",
+        ],
+      },
+      {
+        group: "In a pan",
+        alt: true,
+        items: [
+          "Heat the oil in a nonstick or well-seasoned skillet over medium heat.",
+          "Cook the salmon 3-4 minutes per side. Brush with the reserved sauce in the last minute and let it caramelize.",
+        ],
+      },
+      {
+        items: [
+          "Rest 2 minutes. Serve over rice with sauteed bok choy or other greens, and a drizzle of chili oil.",
+        ],
+      },
+    ],
+    tips: [
+      "Don't marinate longer than an hour. The sauce will start to cure the fish.",
+      "Pull the salmon when the thickest part is just opaque (about 125°F for medium). It keeps cooking as it rests.",
+      "Watch closely under the broiler. The sugars go from charred to burnt quickly.",
+    ],
+  },
+  {
     title: "Charah Tofu Stir Fry",
     slug: "char-siu-tofu",
     description:
