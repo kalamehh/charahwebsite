@@ -211,7 +211,7 @@ export const recipes: Recipe[] = [
     title: "Char Siu Salmon",
     slug: "char-siu-salmon",
     description:
-      "Salmon fillets glazed in Char Siu BBQ Sauce until sticky and charred at the edges. Dinner in 20 minutes.",
+      "Salmon fillets glazed in Char Siu BBQ Sauce until sticky and charred at the edges. Dinner in 15 minutes.",
     image: "/char-siu-salmon.jpg",
     imageAlt: "Char siu glazed salmon with rice and bok choy, next to bottles of Charah sauce and chili oil",
     imagePosition: "center 85%",
@@ -220,17 +220,16 @@ export const recipes: Recipe[] = [
     meal: "main",
     difficulty: "easy",
     prepMinutes: 5,
-    cookMinutes: 15,
+    cookMinutes: 10,
     servings: 4,
-    tags: ["cantonese", "oven", "weeknight", "quick", "air-fryer"],
+    tags: ["cantonese", "oven", "weeknight", "quick"],
     intro:
-      "Rich, fatty salmon is made for char siu sauce. It caramelizes fast under high heat, so the top lacquers and chars while the inside stays tender. Serve with rice and greens for an easy weeknight dinner.",
+      "It turns out salmon is made for char siu sauce. It caramelizes fast under high heat, so the top chars while the inside stays tender. Serve with grains and greens for an easy dinner treat.",
     ingredients: [
       {
         items: [
           "4 salmon fillets (about 6 oz each), skin on or off",
-          "1/4 cup Charah Char Siu BBQ Sauce (save 1 tbsp for basting)",
-          "1 tbsp neutral oil",
+          "1/4 cup Charah Char Siu BBQ Sauce",
           "Charah chili oil, to serve (optional)",
         ],
       },
@@ -238,29 +237,29 @@ export const recipes: Recipe[] = [
     steps: [
       {
         items: [
-          "Pat the salmon dry. Brush or rub all over with the Char Siu BBQ Sauce. Marinate 15 minutes at room temperature, or up to 1 hour in the fridge.",
+          "Add Charah BBQ sauce and salmon fillets in a bowl to mix. Marinate for 5-15 minutes.",
         ],
       },
       {
         group: "In the oven",
         alt: true,
         items: [
-          "Heat the oven to 400°F. Line a sheet pan with foil and oil it lightly.",
-          "Place the salmon on the pan and roast 8-10 minutes, until just cooked through.",
-          "Brush with the reserved sauce and broil 1-2 minutes until charred in spots.",
+          "Line a sheet pan with foil for easy cleaning.",
+          "Broil at low setting for 5-7 minutes until the exterior looks cooked/ pale orange.",
+          "Switch to broil at high setting for 1-3 minutes and take it out when the sauce looks glossy with a bit of char. (See tips)",
         ],
       },
       {
         group: "In a pan",
         alt: true,
         items: [
-          "Heat the oil in a nonstick or well-seasoned skillet over medium heat.",
-          "Cook the salmon 3-4 minutes per side. Brush with the reserved sauce in the last minute and let it caramelize.",
+          "Heat a nonstick or well-seasoned skillet over medium heat.",
+          "Cook the salmon 3-4 minutes per side and let the sauce caramelize.",
         ],
       },
       {
         items: [
-          "Rest 2 minutes. Serve over rice with sauteed bok choy or other greens, and a drizzle of chili oil.",
+          "Serve over grains and some greens (e.g. bok choy/ salad), and a drizzle of Charah chili oil.",
         ],
       },
     ],
