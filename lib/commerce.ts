@@ -38,13 +38,13 @@ export const SHIPPING = {
   freeThresholdCents: 5000,
   note: "$5.99 flat shipping — free on orders over $50.",
   timing:
-    "We ship every weekend via USPS, which then takes 2–5 business days depending on your delivery address (contiguous US only). Once we ship, you'll receive a tracking number by email.",
+    "We ship every weekend via UPS, which then takes 2–5 business days depending on your delivery address (contiguous US only). Once we ship, you'll receive a tracking number by email.",
 }
 
 /**
- * Postal-code-adjacent "state" values USPS/Stripe treat as domestic but that
- * we don't ship to (see lib/resend.ts + the Stripe webhook) -- pay-by-weight
- * Priority Mail is meaningfully more expensive to these zones than the flat
+ * Postal-code-adjacent "state" values UPS/Stripe treat as domestic but that
+ * we don't ship to (see lib/resend.ts + the Stripe webhook) -- shipping by
+ * weight is meaningfully more expensive to these zones than the flat
  * $5.99 covers, on top of longer transit time. Stripe Checkout can only
  * restrict shipping by *country*, not state, so an order from one of these
  * can still get placed and paid; the webhook catches it after the fact.

@@ -180,7 +180,7 @@ export async function sendShippedNotification(
   const html = wrap(`
     <h1 style="font-size:20px;margin:0 0 8px;">Your order is on its way!</h1>
     <p style="color:#6B6259;line-height:1.6;">
-      ${params.carrier ?? "USPS"} tracking number: <strong>${params.trackingNumber}</strong>
+      ${params.carrier ?? "UPS"} tracking number: <strong>${params.trackingNumber}</strong>
     </p>
     ${
       params.trackingUrl
