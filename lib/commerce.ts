@@ -35,8 +35,8 @@ export type CartLine = { slug: string; qty: number }
 /** Shipping — flat rate under the threshold, free at or above it. */
 export const SHIPPING = {
   flatCents: 599,
-  freeThresholdCents: 4000,
-  note: "$5.99 flat shipping — free on orders over $40.",
+  freeThresholdCents: 5000,
+  note: "$5.99 flat shipping — free on orders over $50.",
   timing:
     "We ship every weekend via USPS, which then takes 2–5 business days depending on your delivery address (contiguous US only). Once we ship, you'll receive a tracking number by email.",
 }

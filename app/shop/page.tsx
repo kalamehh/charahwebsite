@@ -16,7 +16,7 @@ export const metadata = buildMetadata({
 export default function ShopPage() {
   return (
     <>
-      <PageHeader eyebrow="Shop" title="Free delivery for orders above $40">
+      <PageHeader eyebrow="Shop" title="Free delivery for orders above $50">
         <p className="max-w-2xl text-body text-charah-stone">{SHIPPING.timing}</p>
       </PageHeader>
 
