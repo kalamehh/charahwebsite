@@ -38,7 +38,7 @@ function FitBounds({ points }: { points: [number, number][] }) {
   return null
 }
 
-export function StockistMapInner({ stockists }: { stockists: Stockist[] }) {
+export function StockistMapInner({ stockists, lockTouchDrag = false }: { stockists: Stockist[]; lockTouchDrag?: boolean }) {
   const located = useMemo(
     () =>
       stockists.filter(
@@ -56,6 +56,7 @@ export function StockistMapInner({ stockists }: { stockists: Stockist[] }) {
       center={points[0]}
       zoom={11}
       scrollWheelZoom={false}
+      dragging={!(lockTouchDrag && L.Browser.mobile)}
       style={{ height: "100%", width: "100%" }}
     >
       <TileLayer

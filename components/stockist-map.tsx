@@ -12,10 +12,19 @@ const StockistMapInner = dynamic(
   },
 )
 
-export function StockistMap({ stockists }: { stockists: Stockist[] }) {
+export function StockistMap({
+  stockists,
+  className = "h-[420px]",
+  lockTouchDrag = false,
+}: {
+  stockists: Stockist[]
+  className?: string
+  /** On touch screens, one finger scrolls the page instead of panning the map (pinch still zooms). For maps inside a long page. */
+  lockTouchDrag?: boolean
+}) {
   return (
-    <div className="h-[420px] overflow-hidden rounded-2xl border border-charah-hairline">
-      <StockistMapInner stockists={stockists} />
+    <div className={`overflow-hidden rounded-2xl border border-charah-hairline ${className}`}>
+      <StockistMapInner stockists={stockists} lockTouchDrag={lockTouchDrag} />
     </div>
   )
 }
