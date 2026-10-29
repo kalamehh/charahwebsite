@@ -20,9 +20,6 @@ export const home = {
   stockistsTeaser: {
     eyebrow: "Where to buy",
     heading: "Find Charah near you",
-    body: "Carried at independent grocers and butcher shops around New York, with more on the way.",
-    /** Recognizable shops named under the map, since pins only show names on tap. */
-    featured: ["Kam Man Market", "Pearl River Mart", "Eli's Market", "The Meat Hook"],
     cta: { label: "See all stockists", href: "/store-locator" },
   },
 }
