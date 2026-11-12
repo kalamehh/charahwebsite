@@ -38,7 +38,7 @@ export const SHIPPING = {
   freeThresholdCents: 5000,
   note: "$5.99 flat shipping — free on orders over $50.",
   timing:
-    "We ship every weekend via UPS, which then takes 2–5 business days depending on your delivery address (contiguous US only). Once we ship, you'll receive a tracking number by email.",
+    "We ship every weekend via UPS, which then takes 3–5 business days depending on your delivery address (contiguous US only). Once we ship, you'll receive a tracking number by email.",
 }
 
 /**

@@ -141,7 +141,7 @@ export async function createShippoOrder(input: CreateShippoOrderInput) {
     subtotal_price: centsToStr(input.subtotalCents),
     shipping_cost: centsToStr(input.shippingCents),
     shipping_cost_currency: "USD",
-    shipping_method: "Standard (3-7 business days)",
+    shipping_method: "Standard (3-5 business days)",
     total_tax: centsToStr(input.taxCents),
     total_price: centsToStr(input.totalCents),
     currency: "USD",

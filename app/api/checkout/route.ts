@@ -94,7 +94,7 @@ export async function POST(req: Request) {
             tax_code: "txcd_92010001",
             delivery_estimate: {
               minimum: { unit: "business_day", value: 3 },
-              maximum: { unit: "business_day", value: 7 },
+              maximum: { unit: "business_day", value: 5 },
             },
           },
         },
