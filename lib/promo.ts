@@ -10,11 +10,11 @@
  * against past successful payments (they carry `promo_id` + `email_key`
  * metadata, set in app/api/checkout/route.ts).
  *
- * Supported: percent-off or dollar-off coupons, usable on any item. Not
- * supported (rejected, so a customer is never promised a discount that won't
- * apply): coupons limited to specific Stripe products (our line items are
- * inline price_data, so they'd match nothing) and codes tied to one Stripe
- * customer (checkout here is guest checkout).
+ * Supported: percent-off or dollar-off coupons, usable on any item; codes tied
+ * to one Stripe customer (matched by email, see findCustomerId); and
+ * "first order only" codes. Not supported (rejected, so a customer is never
+ * promised a discount that won't apply): coupons limited to specific Stripe
+ * products (our line items are inline price_data, so they'd match nothing).
  */
 
 import type Stripe from "stripe"
@@ -56,11 +56,28 @@ function usd(cents: number): string {
   return (cents / 100).toLocaleString("en-US", { style: "currency", currency: "USD" })
 }
 
+/**
+ * The Stripe Customer for an email, if one exists. Checkout creates a Customer
+ * on a buyer's first order (customer_creation in app/api/checkout) and reuses
+ * it afterwards. Emails are stored and looked up lower-cased, because Stripe's
+ * email filter is case-sensitive.
+ */
+export async function findCustomerId(stripe: Stripe, email: string): Promise<string | null> {
+  const found = await stripe.customers.list({ email: email.trim().toLowerCase(), limit: 1 })
+  return found.data[0]?.id ?? null
+}
+
 const INVALID: PromoResult = { ok: false, error: "That code isn't valid.", status: 404 }
 
 export async function validatePromo(
   stripe: Stripe,
-  params: { code: string; email: string; subtotalCents: number },
+  params: {
+    code: string
+    email: string
+    subtotalCents: number
+    /** The buyer's existing Stripe Customer id, null if none, or leave out to look it up. */
+    customerId?: string | null
+  },
 ): Promise<PromoResult> {
   const typed = params.code.trim()
   if (!typed || typed.length > 64 || !/^[A-Za-z0-9-]+$/.test(typed)) return INVALID
@@ -97,7 +114,10 @@ export async function validatePromo(
 
   const coupon = promo.promotion.coupon
   if (!coupon || typeof coupon === "string" || !coupon.valid) return INVALID
-  if (promo.customer || promo.customer_account) return INVALID
+  if (promo.customer_account) return INVALID
+  const customerId = params.customerId === undefined ? await findCustomerId(stripe, params.email) : params.customerId
+  const restrictedTo = typeof promo.customer === "string" ? promo.customer : promo.customer?.id
+  if (restrictedTo && restrictedTo !== customerId) return INVALID
   if (coupon.applies_to?.products?.length) {
     console.error(`[promo] ${promo.code}: coupon is limited to Stripe products, which this checkout doesn't support`)
     return INVALID
@@ -106,6 +126,16 @@ export async function validatePromo(
   const min = promo.restrictions.minimum_amount
   if (min && promo.restrictions.minimum_amount_currency === "usd" && params.subtotalCents < min) {
     return { ok: false, error: `This code needs an order of at least ${usd(min)}.`, status: 400 }
+  }
+
+  if (promo.restrictions.first_time_transaction && customerId) {
+    const prior = await stripe.paymentIntents.search({
+      query: `customer:'${customerId}' AND status:'succeeded'`,
+      limit: 1,
+    })
+    if (prior.data.length > 0) {
+      return { ok: false, error: "That code is for first orders only.", status: 409 }
+    }
   }
 
   if (promo.metadata?.once_per_email === "true") {

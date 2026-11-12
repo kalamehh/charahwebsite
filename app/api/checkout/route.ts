@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import Stripe from "stripe"
 import { priceCart, type CartLine } from "@/lib/commerce"
 import { site } from "@/content/site"
-import { emailKey, isValidEmail, validatePromo, type PromoResult } from "@/lib/promo"
+import { emailKey, findCustomerId, isValidEmail, validatePromo, type PromoResult } from "@/lib/promo"
 
 export const runtime = "nodejs"
 
@@ -57,13 +57,17 @@ export async function POST(req: Request) {
   const stripe = new Stripe(key)
 
   try {
+    // Returning buyers reuse their Stripe Customer (matched by email); a first
+    // order gets one created when the payment completes -- see customer_creation below.
+    const existingCustomerId = await findCustomerId(stripe, email)
+
     // Re-check the promo code here, not just in /api/promo: the client's
     // earlier "Apply" is only a preview and can't be trusted. A code that
     // fails now (used up, expired, already used with this email) stops the
     // checkout with the reason, so nobody pays expecting a discount they won't get.
     let promo: Extract<PromoResult, { ok: true }> | null = null
     if (promoCode) {
-      const result = await validatePromo(stripe, { code: promoCode, email, subtotalCents })
+      const result = await validatePromo(stripe, { code: promoCode, email, subtotalCents, customerId: existingCustomerId })
       if (!result.ok) return NextResponse.json({ error: result.error }, { status: result.status })
       promo = result
     }
@@ -84,8 +88,13 @@ export async function POST(req: Request) {
       automatic_tax: { enabled: taxEnabled },
       // Locks the email Stripe's page shows (it can't be edited there), so the
       // once-per-email check above can't be dodged by typing a different one
-      // on Stripe's page.
-      customer_email: email,
+      // on Stripe's page. Either way the buyer ends up as a Stripe Customer:
+      // an existing one is reused (and updated with the name and shipping
+      // address entered at checkout); otherwise one is created once the
+      // payment completes, not for abandoned checkouts.
+      ...(existingCustomerId
+        ? { customer: existingCustomerId, customer_update: { name: "auto" as const, shipping: "auto" as const } }
+        : { customer_email: email.toLowerCase(), customer_creation: "always" as const }),
       ...(promo ? { discounts: [{ promotion_code: promo.promotionCodeId }] } : {}),
       line_items: items.map(({ sellable, qty }) => ({
         quantity: qty,
