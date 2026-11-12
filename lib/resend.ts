@@ -33,6 +33,9 @@ export type OrderSummary = {
   shippingCents: number
   taxCents: number
   totalCents: number
+  /** Promo discount in cents (positive number), shown as its own row. */
+  discountCents?: number
+  promoCode?: string
 }
 
 async function send(params: {
@@ -83,6 +86,7 @@ function itemsRows(items: OrderItem[]): string {
 function totalsRows(o: OrderSummary): string {
   const rows: [string, number][] = [
     ["Subtotal", o.subtotalCents],
+    ...(o.discountCents ? ([[o.promoCode ? `Discount (${o.promoCode})` : "Discount", -o.discountCents]] as [string, number][]) : []),
     ["Shipping", o.shippingCents],
     ["Tax", o.taxCents],
   ]

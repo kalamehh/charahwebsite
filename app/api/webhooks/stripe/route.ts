@@ -81,6 +81,10 @@ export async function POST(req: Request) {
     const shippingCents = session.shipping_cost?.amount_subtotal ?? 0
     const taxCents = session.total_details?.amount_tax ?? 0
     const totalCents = session.amount_total ?? 0
+    // subtotal and line prices are pre-discount; the discount (if a promo code
+    // was used) is its own figure, so subtotal - discount + shipping + tax = total.
+    const discountCents = session.total_details?.amount_discount ?? 0
+    const promoCode = session.metadata?.promo_code || undefined
 
     const items = (session.line_items?.data ?? []).map((li) => {
       const product = li.price?.product
@@ -102,7 +106,7 @@ export async function POST(req: Request) {
       // order to AK/HI/a territory can still get placed and paid here. Skip
       // Shippo + the normal confirmation entirely; alert the team to refund
       // manually rather than doing that automatically.
-      const orderSummary = { orderNumber: session.id, items, subtotalCents, shippingCents, taxCents, totalCents }
+      const orderSummary = { orderNumber: session.id, items, subtotalCents, shippingCents, taxCents, totalCents, discountCents, promoCode }
       if (RESEND_ENABLED) {
         if (customerEmail) {
           await sendUnshippableRegionNotice(customerEmail, orderSummary)
@@ -152,10 +156,12 @@ export async function POST(req: Request) {
         shippingCents,
         taxCents,
         totalCents,
+        discountCents,
+        promoCode,
       })
     }
 
-    const orderSummary = { orderNumber: session.id, items, subtotalCents, shippingCents, taxCents, totalCents }
+    const orderSummary = { orderNumber: session.id, items, subtotalCents, shippingCents, taxCents, totalCents, discountCents, promoCode }
 
     if (RESEND_ENABLED) {
       if (customerEmail) {

@@ -70,6 +70,11 @@ export type CreateShippoOrderInput = {
   shippingCents: number
   taxCents: number
   totalCents: number
+  /** Promo discount, if any. Shippo has no discount field, so line items and
+   *  subtotal stay pre-discount, total_price is what was actually paid, and the
+   *  discount is spelled out in the order's notes so the numbers reconcile. */
+  discountCents?: number
+  promoCode?: string
 }
 
 function centsToStr(cents: number): string {
@@ -130,7 +135,11 @@ export async function createShippoOrder(input: CreateShippoOrderInput) {
 
   const body = JSON.stringify({
     order_number: orderNumber,
-    notes: `Stripe session: ${input.stripeSessionId}`,
+    notes:
+      `Stripe session: ${input.stripeSessionId}` +
+      (input.discountCents
+        ? ` | Promo ${input.promoCode ?? ""}: -$${centsToStr(input.discountCents)} (subtotal and lines are pre-discount)`
+        : ""),
     order_status: "PAID",
     placed_at: input.placedAt,
     to_address: input.toAddress,
