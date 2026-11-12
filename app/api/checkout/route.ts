@@ -96,7 +96,7 @@ export async function POST(req: Request) {
         ? { customer: existingCustomerId, customer_update: { name: "auto" as const, shipping: "auto" as const } }
         : { customer_email: email.toLowerCase(), customer_creation: "always" as const }),
       ...(promo ? { discounts: [{ promotion_code: promo.promotionCodeId }] } : {}),
-      line_items: items.map(({ sellable, qty }) => ({
+      line_items: items.map(({ sellable, qty }, index) => ({
         quantity: qty,
         price_data: {
           currency: "usd",
@@ -112,7 +112,10 @@ export async function POST(req: Request) {
             // to map each line item back to a slug -- e.g. for Shippo's required
             // order weight, without fragile matching on the display name.
             metadata: { slug: sellable.slug, sku: sellable.sku },
-            ...(allowImages ? { images: [`${origin}${sellable.image}`] } : {}),
+            // One shared photo (both bottles) on Stripe's order summary instead of
+            // a picture per product. Only the first line carries it, so a
+            // two-item cart doesn't show the same thumbnail twice.
+            ...(allowImages && index === 0 ? { images: [`${origin}/checkout-photo.jpg`] } : {}),
           },
         },
       })),
