@@ -2,7 +2,6 @@ import { NextResponse } from "next/server"
 import Stripe from "stripe"
 import { priceCart, type CartLine } from "@/lib/commerce"
 import { site } from "@/content/site"
-import { emailKey, findCustomerId, isValidEmail, validatePromo, type PromoResult } from "@/lib/promo"
 
 export const runtime = "nodejs"
 
@@ -26,14 +25,10 @@ export async function POST(req: Request) {
   }
 
   let lines: CartLine[]
-  let email = ""
-  let promoCode = ""
   let returnTo = "/shop"
   try {
-    const body = (await req.json()) as { lines?: CartLine[]; email?: string; promoCode?: string; returnTo?: string }
+    const body = (await req.json()) as { lines?: CartLine[]; returnTo?: string }
     lines = Array.isArray(body.lines) ? body.lines : []
-    if (typeof body.email === "string") email = body.email.trim()
-    if (typeof body.promoCode === "string") promoCode = body.promoCode.trim()
     // Only accept a same-origin relative path so canceling returns the shopper
     // to the page they left. Reject protocol-relative ("//evil.com") and absolute URLs.
     if (typeof body.returnTo === "string" && /^\/(?!\/)/.test(body.returnTo)) {
@@ -48,30 +43,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Your cart is empty." }, { status: 400 })
   }
 
-  if (!isValidEmail(email)) {
-    return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 })
-  }
-
   const origin = resolveOrigin(req)
   const allowImages = origin.startsWith("https://")
   const stripe = new Stripe(key)
 
   try {
-    // Returning buyers reuse their Stripe Customer (matched by email); a first
-    // order gets one created when the payment completes -- see customer_creation below.
-    const existingCustomerId = await findCustomerId(stripe, email)
-
-    // Re-check the promo code here, not just in /api/promo: the client's
-    // earlier "Apply" is only a preview and can't be trusted. A code that
-    // fails now (used up, expired, already used with this email) stops the
-    // checkout with the reason, so nobody pays expecting a discount they won't get.
-    let promo: Extract<PromoResult, { ok: true }> | null = null
-    if (promoCode) {
-      const result = await validatePromo(stripe, { code: promoCode, email, subtotalCents, customerId: existingCustomerId })
-      if (!result.ok) return NextResponse.json({ error: result.error }, { status: result.status })
-      promo = result
-    }
-
     // Sales tax via Stripe Tax, calculated from the shipping address. Gated on an
     // env flag because it errors until Stripe Tax is set up in the Dashboard
     // (Settings → Tax: origin address + nexus-state registrations). Flip
@@ -86,16 +62,11 @@ export async function POST(req: Request) {
       // devices — this isn't a separate payment_method_types entry.
       payment_method_types: ["card"],
       automatic_tax: { enabled: taxEnabled },
-      // Locks the email Stripe's page shows (it can't be edited there), so the
-      // once-per-email check above can't be dodged by typing a different one
-      // on Stripe's page. Either way the buyer ends up as a Stripe Customer:
-      // an existing one is reused (and updated with the name and shipping
-      // address entered at checkout); otherwise one is created once the
-      // payment completes, not for abandoned checkouts.
-      ...(existingCustomerId
-        ? { customer: existingCustomerId, customer_update: { name: "auto" as const, shipping: "auto" as const } }
-        : { customer_email: email.toLowerCase(), customer_creation: "always" as const }),
-      ...(promo ? { discounts: [{ promotion_code: promo.promotionCodeId }] } : {}),
+      // Stripe's own "Add promotion code" box on its payment page. Codes are
+      // created in the Stripe Dashboard (Product catalog -> Coupons) and Stripe
+      // enforces their limits (expiry, max redemptions, minimum order,
+      // first-order-only). It can't enforce "once per email" for a reusable code.
+      allow_promotion_codes: true,
       line_items: items.map(({ sellable, qty }, index) => ({
         quantity: qty,
         price_data: {
@@ -139,7 +110,6 @@ export async function POST(req: Request) {
       metadata: {
         subtotal_cents: String(subtotalCents),
         shipping_cents: String(shippingCents),
-        ...(promo ? { promo_code: promo.code } : {}),
       },
       // Order details on the *payment* (what Stripe's Payments list, CSV
       // exports and bookkeeping integrations read) -- Checkout line items alone
@@ -151,10 +121,6 @@ export async function POST(req: Request) {
         metadata: {
           items: items.map((i) => `${i.sellable.sku} x${i.qty}`).join("; "),
           ...Object.fromEntries(items.map((i) => [`qty_${i.sellable.sku}`, String(i.qty)])),
-          // email_key is what "once per email" codes are checked against (see
-          // lib/promo.ts); promo_id/promo_code tie the payment to its code.
-          email_key: emailKey(email),
-          ...(promo ? { promo_id: promo.promotionCodeId, promo_code: promo.code } : {}),
         },
       },
       success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,

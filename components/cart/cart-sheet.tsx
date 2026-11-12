@@ -1,7 +1,7 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { Minus, Plus, ShoppingBag, X } from "lucide-react"
 import {
   Sheet,
@@ -15,7 +15,31 @@ import { getSellable, priceCart, formatUsd, SHIPPING } from "@/lib/commerce"
 
 export function CartSheet() {
   const { lines, count, setQty, remove, open, setOpen } = useCart()
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
   const { subtotalCents, shippingCents } = priceCart(lines)
+
+  async function checkout() {
+    setSubmitting(true)
+    setError(null)
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lines,
+          returnTo: window.location.pathname + window.location.search,
+        }),
+      })
+      const data = (await res.json()) as { url?: string; error?: string }
+      if (!res.ok || !data.url) throw new Error(data.error || "Checkout failed")
+      window.location.href = data.url
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Something went wrong")
+      setSubmitting(false)
+    }
+  }
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -108,13 +132,16 @@ export function CartSheet() {
               </div>
               <p className="mt-2 text-body-sm text-charah-stone">{SHIPPING.note}</p>
 
-              <Link
-                href="/checkout"
-                onClick={() => setOpen(false)}
-                className="mt-4 block w-full rounded-lg bg-charah-red px-5 py-3 text-center text-body-sm font-semibold text-charah-cream transition-colors hover:bg-charah-red-dark"
+              {error ? <p className="mt-3 text-body-sm text-charah-red">{error}</p> : null}
+
+              <button
+                type="button"
+                onClick={checkout}
+                disabled={submitting}
+                className="mt-4 w-full rounded-lg bg-charah-red px-5 py-3 text-body-sm font-semibold text-charah-cream transition-colors hover:bg-charah-red-dark disabled:opacity-60"
               >
-                Checkout
-              </Link>
+                {submitting ? "Taking you to checkout…" : "Checkout"}
+              </button>
               <p className="mt-2 text-center text-body-sm text-charah-stone">
                 Secure checkout powered by Stripe.
               </p>

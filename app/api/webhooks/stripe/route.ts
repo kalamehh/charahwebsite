@@ -84,7 +84,18 @@ export async function POST(req: Request) {
     // subtotal and line prices are pre-discount; the discount (if a promo code
     // was used) is its own figure, so subtotal - discount + shipping + tax = total.
     const discountCents = session.total_details?.amount_discount ?? 0
-    const promoCode = session.metadata?.promo_code || undefined
+    // Stripe's own promo box applied the code, so read it back from the
+    // discount. A failed lookup only loses the code's name in the emails, so it
+    // must not fail the whole order (and trigger a webhook retry).
+    let promoCode: string | undefined
+    try {
+      const promo = session.total_details?.breakdown?.discounts?.[0]?.discount?.promotion_code
+      if (promo) {
+        promoCode = typeof promo === "string" ? (await stripe.promotionCodes.retrieve(promo)).code : promo.code
+      }
+    } catch (err) {
+      console.error("[webhook/stripe] couldn't read promo code for session", sessionId, ":", err)
+    }
 
     const items = (session.line_items?.data ?? []).map((li) => {
       const product = li.price?.product
