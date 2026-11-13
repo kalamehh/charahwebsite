@@ -1,9 +1,11 @@
 /**
- * Where to buy Charah. Powers /store-locator (grouped list now; an interactive
- * map drops in once this list passes ~10 locations — see docs/rebuild-plan.md).
- *
- * lat/lng are optional today; fill them in before wiring the map.
+ * Where to buy Charah. Powers /store-locator: the map plus a list grouped by area
+ * (see STOCKIST_AREAS and stockistsByArea).
  */
+
+/** Sections of the store-locator page, in display order (home area first). */
+export const STOCKIST_AREAS = ["New York City", "Hudson Valley", "Connecticut", "Seattle"] as const
+export type StockistArea = (typeof STOCKIST_AREAS)[number]
 
 export type Stockist = {
   name: string
@@ -12,6 +14,11 @@ export type Stockist = {
   city: string
   state: string
   zip: string
+  /** Section on the store-locator page. */
+  area: StockistArea
+  /** Sub-section inside "New York City" only. */
+  borough?: "Manhattan" | "Brooklyn"
+  /** Neighbourhood or town, shown next to the name. */
   region: string
   url?: string
   lat?: number
@@ -32,6 +39,8 @@ export const stockists: Stockist[] = [
     city: "New York",
     state: "NY",
     zip: "10013",
+    area: "New York City",
+    borough: "Manhattan",
     region: "Chinatown",
     url: "http://www.kamman.com/chinatown",
     lat: 40.7168553,
@@ -47,6 +56,8 @@ export const stockists: Stockist[] = [
     city: "New York",
     state: "NY",
     zip: "10013",
+    area: "New York City",
+    borough: "Manhattan",
     region: "SoHo",
     url: "https://www.pearlriver.com",
     lat: 40.7204665,
@@ -61,6 +72,8 @@ export const stockists: Stockist[] = [
     city: "New York",
     state: "NY",
     zip: "10011",
+    area: "New York City",
+    borough: "Manhattan",
     region: "Chelsea",
     url: "https://www.pearlriver.com",
     lat: 40.7420513,
@@ -76,6 +89,8 @@ export const stockists: Stockist[] = [
     city: "Brooklyn",
     state: "NY",
     zip: "11215",
+    area: "New York City",
+    borough: "Brooklyn",
     region: "Park Slope",
     url: "https://kslopemarket.com",
     lat: 40.668979,
@@ -90,6 +105,8 @@ export const stockists: Stockist[] = [
     city: "Brooklyn",
     state: "NY",
     zip: "11201",
+    area: "New York City",
+    borough: "Brooklyn",
     region: "Cobble Hill",
     url: "https://shelskys.com",
     lat: 40.6893645,
@@ -104,6 +121,8 @@ export const stockists: Stockist[] = [
     city: "New York",
     state: "NY",
     zip: "10028",
+    area: "New York City",
+    borough: "Manhattan",
     region: "Upper East Side",
     url: "https://www.elizabar.com",
     lat: 40.7750655,
@@ -120,6 +139,8 @@ export const stockists: Stockist[] = [
     city: "Brooklyn",
     state: "NY",
     zip: "11217",
+    area: "New York City",
+    borough: "Brooklyn",
     region: "Fort Greene",
     url: "https://greenegrape.com",
     lat: 40.686288,
@@ -135,6 +156,8 @@ export const stockists: Stockist[] = [
     city: "Brooklyn",
     state: "NY",
     zip: "11205",
+    area: "New York City",
+    borough: "Brooklyn",
     region: "Fort Greene",
     url: "https://myrtlewombat.com",
     lat: 40.6941892,
@@ -149,6 +172,8 @@ export const stockists: Stockist[] = [
     city: "Brooklyn",
     state: "NY",
     zip: "11211",
+    area: "New York City",
+    borough: "Brooklyn",
     region: "Williamsburg",
     url: "https://www.themeathook.com",
     lat: 40.7167566,
@@ -163,6 +188,8 @@ export const stockists: Stockist[] = [
     city: "Brooklyn",
     state: "NY",
     zip: "11231",
+    area: "New York City",
+    borough: "Brooklyn",
     region: "Carroll Gardens",
     url: "https://www.themeathook.com",
     lat: 40.6830591,
@@ -179,24 +206,66 @@ export const stockists: Stockist[] = [
     city: "Cold Spring",
     state: "NY",
     zip: "10516",
-    region: "Hudson Valley",
+    area: "Hudson Valley",
+    region: "Cold Spring",
     url: "https://marbledmeatshop.com",
     lat: 41.420094,
     lng: -73.954583,
     mapUrl: "https://www.google.com/maps?cid=18440461032392624536",
     carries: ["original"],
   },
+  {
+    // Centerbrook is a village within the town of Essex, CT.
+    name: "Cooked Marketplace & Mercantile",
+    type: "retail",
+    address: "5 Main St",
+    city: "Centerbrook",
+    state: "CT",
+    zip: "06409",
+    area: "Connecticut",
+    region: "Centerbrook",
+    url: "https://www.cookedmarketplace.com",
+    lat: 41.3520216,
+    lng: -72.4071998,
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Cooked+Marketplace+%26+Mercantile,+5+Main+St,+Centerbrook,+CT+06409",
+    carries: ["original"],
+  },
+  {
+    name: "Mixed Pantry",
+    type: "retail",
+    address: "2233 1st Ave",
+    city: "Seattle",
+    state: "WA",
+    zip: "98121",
+    area: "Seattle",
+    region: "Belltown",
+    url: "https://www.mixedpantry.market",
+    lat: 47.6131764,
+    lng: -122.3465257,
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Mixed+Pantry,+2233+1st+Ave,+Seattle,+WA+98121",
+    carries: ["original"],
+  },
 ]
 
-/** Stockists grouped by region, for the list view. */
-export function stockistsByRegion(): { region: string; items: Stockist[] }[] {
-  const map = new Map<string, Stockist[]>()
-  for (const s of stockists) {
-    const list = map.get(s.region) ?? []
-    list.push(s)
-    map.set(s.region, list)
-  }
-  return [...map.entries()].map(([region, items]) => ({ region, items }))
+/**
+ * Stockists for the list view: one section per area (see STOCKIST_AREAS), each
+ * split into labelled groups only where that helps -- New York City is split
+ * into Manhattan and Brooklyn, every other area is a single unlabelled group.
+ * Alphabetical within a group (by name, then neighbourhood, so the two
+ * Meat Hook shops stay in a stable order).
+ */
+export function stockistsByArea(): { area: StockistArea; groups: { label?: string; items: Stockist[] }[] }[] {
+  const byName = (a: Stockist, b: Stockist) => a.name.localeCompare(b.name) || a.region.localeCompare(b.region)
+  const BOROUGHS = ["Manhattan", "Brooklyn"] as const
+  return STOCKIST_AREAS.map((area) => {
+    const inArea = stockists.filter((s) => s.area === area)
+    const groups =
+      area === "New York City"
+        ? BOROUGHS.map((b) => ({ label: b as string | undefined, items: inArea.filter((s) => s.borough === b).sort(byName) }))
+        : [{ label: undefined, items: [...inArea].sort(byName) }]
+    return { area, groups: groups.filter((g) => g.items.length > 0) }
+  }).filter((a) => a.groups.length > 0)
 }
 
 /**
