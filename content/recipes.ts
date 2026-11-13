@@ -49,7 +49,7 @@ export const recipes: Recipe[] = [
     title: "Classic Char Siu Pork",
     slug: "classic-char-siu-pork",
     description:
-      "Sticky, lacquered Cantonese barbecue pork made at home with just one bottle of Char Siu BBQ Sauce.",
+      "Sticky, lacquered Cantonese barbecue pork made at home with just our Charah sauce!",
     image: "/headline.png",
     imageAlt: "Sliced char siu pork with a glossy red glaze over rice",
     product: ["original"],
@@ -65,7 +65,7 @@ export const recipes: Recipe[] = [
     ingredients: [
       {
         items: [
-          "3 lb boneless pork shoulder (butt), cut into 2-inch-thick strips",
+          "3 lb boneless pork shoulder (butt)",
           "1/2 cup Charah Char Siu BBQ Sauce (save 1 tbsp for basting if doing)",
         ],
       },
@@ -73,6 +73,7 @@ export const recipes: Recipe[] = [
     steps: [
       {
         items: [
+          "Cut the pork into long strips that are 2x1 inches thick.",
           "Combine the pork and Char Siu BBQ Sauce in a zip-top bag or container. Marinate 30 minutes in room temperature or overnight in the fridge.",
         ],
       },
@@ -108,22 +109,46 @@ export const recipes: Recipe[] = [
     title: "Weekday Char Siu Pork",
     slug: "weekday-char-siu-pork",
     description:
-      "The classic, sped up — pork tenderloin, a 20-minute marinade, and a hot pan. Dinner in about half an hour.",
-    image: PLACEHOLDER_IMAGE,
-    imageAlt: "Char siu pork",
+      "Air fryer char siu in 25 minutes. No compromise on flavor and you can make it every day.",
+    image: "/weekday-char-siu-pork.jpg",
+    imageAlt: "Sliced char siu pork on a cutting board, next to a bottle of Charah Char Siu BBQ Sauce",
+    imagePosition: "center 78%",
     product: ["original"],
     protein: "pork",
     meal: "main",
     difficulty: "easy",
     prepMinutes: 10,
-    cookMinutes: 20,
-    servings: 4,
-    tags: ["cantonese", "quick", "weeknight"],
+    cookMinutes: 25,
+    servings: 6,
+    tags: ["cantonese", "air-fryer", "weeknight", "quick"],
     intro:
-      "A faster take on the classic — thin pork cutlets or tenderloin, a short marinade, and a hot pan or broiler instead of a long roast.",
-    ingredients: [],
-    steps: [],
-    draft: true,
+      "Classic char siu without heating the oven. Marinated pork shoulder cooks in the air fryer in 25 minutes, with one baste along the way for a sticky glaze. Add a quick blast of high heat at the end if you want it extra charred.",
+    ingredients: [
+      {
+        items: [
+          "3 lb boneless pork shoulder (butt)",
+          "1/2 cup Charah Char Siu BBQ Sauce (save 1-2 tbsp for basting/brushing)",
+        ],
+      },
+    ],
+    steps: [
+      {
+        items: [
+          "Cut the pork into long strips that are 2x1 inches thick.",
+          "Combine the pork and Char Siu BBQ Sauce in a zip-top bag or container. Marinate 30 minutes at room temperature or overnight in the fridge.",
+          "Preheat the air fryer to 400°F with the empty tray inside.",
+          "Once preheated, line the tray with parchment paper and lay the pork on top.",
+          "Cook at 380°F for 25 minutes. Around the 12-13 minute mark, pull the tray out, flip the pork and baste with more sauce so it sticks to the meat. Put it back in and finish the cycle.",
+          "When the 25 minutes are up, it should look a bit charred. For a stickier, more charred finish (optional), brush on a little more sauce and cook at 400°F for 5 more minutes so the sauce caramelizes and the edges char.",
+          "Done! Rest a few minutes, then slice against the grain and serve on rice, noodles, bao or tacos, or eat as is.",
+        ],
+      },
+    ],
+    tips: [
+      "Pork shoulder is the perfect cut for this. If you are at a Chinese butcher, ask specifically for pork shoulder butt (梅頭) or the char siu cut.",
+      "Don't crowd the tray. If the pork doesn't fit in one layer with a little space between pieces, cook it in two batches.",
+      "Keep the parchment weighed down by the pork. Loose parchment can lift in the fan and touch the heating element.",
+    ],
   },
   {
     title: "Char Siu Pork Ribs",
@@ -150,7 +175,7 @@ export const recipes: Recipe[] = [
     title: "Char Siu Chicken",
     slug: "char-siu-chicken",
     description:
-      "Same deal as our classic char siu pork but on chicken thighs - faster, cheaper and more foolproof.",
+      "Same deal as our classic char siu pork but on chicken thighs, which are more forgiving and foolproof.",
     image: "/char-siu-chicken.jpg",
     imageAlt: "Char siu chicken thighs glazed and charred on the grill",
     imagePosition: "center 82%",
@@ -163,7 +188,7 @@ export const recipes: Recipe[] = [
     servings: 4,
     tags: ["cantonese", "grill", "oven", "weeknight", "meal-prep"],
     intro:
-      "Same deal as our classic char siu pork but on chicken thighs - faster, cheaper and more foolproof. Trust us that this will become a weeknight staple for you.",
+      "Same deal as our classic char siu pork but on chicken thighs, which are more forgiving and foolproof. Trust us that this will become a weeknight staple for you.",
     ingredients: [
       {
         items: [
@@ -213,8 +238,8 @@ export const recipes: Recipe[] = [
     description:
       "Salmon fillets glazed in Char Siu BBQ Sauce until sticky and charred at the edges. Dinner in 15 minutes.",
     image: "/char-siu-salmon.jpg",
-    imageAlt: "Char siu glazed salmon with rice and bok choy, next to bottles of Charah sauce and chili oil",
-    imagePosition: "center 85%",
+    imageAlt: "Char siu glazed salmon with rice and sliced avocado, next to a bottle of Charah sauce and a jar of chili oil",
+    imagePosition: "center 88%",
     product: ["original", "chili-oil"],
     protein: "seafood",
     meal: "main",

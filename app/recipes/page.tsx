@@ -13,11 +13,7 @@ export const metadata = buildMetadata({
 export default function RecipesPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="From the kitchen"
-        title="Recipes"
-        intro="More recipes are on the way."
-      />
+      <PageHeader eyebrow="From the kitchen" title="Recipes" />
       <div className="container grid gap-8 py-section sm:grid-cols-2 lg:grid-cols-3">
         {recipes
           .filter((recipe) => !recipe.draft)
