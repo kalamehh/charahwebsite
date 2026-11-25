@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
+import { Analytics } from "@vercel/analytics/next"
 import { Inter, Anton, Playfair_Display } from "next/font/google"
 import "./globals.css"
 import { CartProvider } from "@/components/cart/cart-provider"
@@ -46,6 +47,8 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <SiteFooter />
         </CartProvider>
+        {/* Cookieless visitor counts. Needs Web Analytics enabled in the Vercel project. */}
+        <Analytics />
       </body>
     </html>
   )
