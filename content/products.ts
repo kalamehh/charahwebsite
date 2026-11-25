@@ -80,7 +80,7 @@ export const products: Product[] = [
     ],
     ingredients: "Canola oil, Sichuan chili flakes, shallot, Sichuan peppercorn, garlic, salt, star anise, cinnamon, bay leaves.",
     allergens: "Contains no major allergens.",
-    netWeight: "6 oz (173 g)",
+    netWeight: "6 oz (170 g)",
     priceCents: 1300,
     shipWeightOz: 14,
     image: "/chili-oil.jpg",
